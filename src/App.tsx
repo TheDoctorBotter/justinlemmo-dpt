@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { Services } from './components/Services';
+import { StateMap } from './components/StateMap';
+import { Disclaimers } from './components/Disclaimers';
 import { Testimonials } from './components/Testimonials';
 import { Footer } from './components/Footer';
 import { AuthPage } from './components/Auth/AuthPage';
@@ -100,7 +102,9 @@ function App() {
       <Header user={user} onSignOut={handleSignOut} />
       <Hero />
       <Services user={user} />
+      <StateMap />
       <Testimonials />
+      <Disclaimers />
       <Footer />
     </div>
   );

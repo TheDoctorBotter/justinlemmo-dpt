@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stethoscope, Mail, Youtube, Shield } from 'lucide-react';
+import { Stethoscope, Mail, Youtube, Shield, FileText } from 'lucide-react';
 
 export const Footer = () => {
   return (
@@ -47,12 +47,22 @@ export const Footer = () => {
           </div>
           
           <div>
-            <h4 className="text-lg font-semibold mb-4">PTBot Partnership</h4>
-            <div className="flex items-start">
-              <Shield className="h-5 w-5 text-green-400 mr-3 mt-1" />
-              <p className="text-gray-300 leading-relaxed">
-                Certified PTBot affiliate working directly with the platform to ensure 
-                AI accuracy and proper therapeutic follow-through for all patients.
+            <h4 className="text-lg font-semibold mb-4">Legal & Licensing</h4>
+            <div className="space-y-3">
+              <div className="flex items-center">
+                <Shield className="h-5 w-5 text-green-400 mr-3" />
+                <span className="text-gray-300 text-sm">
+                  Texas PT License #1215276
+                </span>
+              </div>
+              <div className="flex items-center">
+                <FileText className="h-5 w-5 text-blue-400 mr-3" />
+                <span className="text-gray-300 text-sm">
+                  HIPAA Compliant Services
+                </span>
+              </div>
+              <p className="text-gray-400 text-sm">
+                Licensed physical therapist providing telehealth services in accordance with state regulations.
               </p>
             </div>
           </div>
@@ -64,14 +74,14 @@ export const Footer = () => {
               © 2025 Dr. Justin Lemmo, DPT. All rights reserved.
             </p>
             <div className="flex space-x-6">
-              <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">
+              <a href="#disclaimers" className="text-gray-400 hover:text-white text-sm transition-colors">
+                Medical Disclaimers
+              </a>
+              <a href="#disclaimers" className="text-gray-400 hover:text-white text-sm transition-colors">
                 Privacy Policy
               </a>
-              <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">
-                Terms of Service
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">
-                Professional Credentials
+              <a href="#licensing" className="text-gray-400 hover:text-white text-sm transition-colors">
+                Licensing Information
               </a>
             </div>
           </div>

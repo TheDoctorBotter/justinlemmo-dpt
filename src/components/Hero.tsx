@@ -11,7 +11,7 @@ export const Hero = () => {
             <span className="block text-blue-600">Tailored for You</span>
           </h2>
           <p className="text-xl text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Doctor of Physical Therapy with 15 years of experience in orthopedics and pediatrics. 
+            Licensed Doctor of Physical Therapy (TX #1215276) with 15 years of experience in orthopedics and pediatrics. 
             I specialize in recovery from low back pain, hip pain, shoulder pain, and knee pain, 
             along with addressing any musculoskeletal concerns.
           </p>
@@ -26,7 +26,7 @@ export const Hero = () => {
                 <Award className="h-8 w-8 text-blue-600" />
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">15+ Years Experience</h3>
-              <p className="text-gray-600 text-center">Specialized in orthopedics and pediatric physical therapy</p>
+              <p className="text-gray-600 text-center">Licensed PT specializing in orthopedics and pediatric physical therapy</p>
             </div>
             <div className="flex flex-col items-center">
               <div className="bg-green-100 p-4 rounded-full mb-4">
@@ -40,7 +40,7 @@ export const Hero = () => {
                 <Clock className="h-8 w-8 text-purple-600" />
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Virtual Convenience</h3>
-              <p className="text-gray-600 text-center">Get professional PT guidance from the comfort of your home</p>
+              <p className="text-gray-600 text-center">HIPAA-compliant telehealth services from the comfort of your home</p>
             </div>
           </div>
         </div>
