@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
 import { MapPin, CheckCircle } from 'lucide-react';
 
+// Using a reliable CDN for US states topology data
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-110m.json";
 
 export const StateMap = () => {
@@ -24,7 +25,7 @@ export const StateMap = () => {
     if (activePracticeStates.includes(stateName)) {
       return '#3B82F6'; // Blue for active practice
     } else if (ptCompactStates.includes(stateName)) {
-      return '#6B7280'; // Dark gray for PT Compact states
+      return '#4B5563'; // Dark gray for PT Compact states
     } else {
       return '#FFFFFF'; // White for non-compact states
     }
@@ -75,55 +76,57 @@ export const StateMap = () => {
         </div>
 
         <div className="bg-gray-50 rounded-2xl p-8 mb-8">
-          <div className="relative">
-            <ComposableMap
-              projection="geoAlbersUsa"
-              projectionConfig={{
-                scale: 1000,
-              }}
-              width={1000}
-              height={600}
-              className="w-full h-auto"
-            >
-              <Geographies geography={geoUrl}>
-                {({ geographies }) =>
-                  geographies.map((geo) => {
-                    const stateName = geo.properties.name;
-                    return (
-                      <Geography
-                        key={geo.rsmKey}
-                        geography={geo}
-                        fill={getStateFill(stateName)}
-                        stroke={getStateStroke(stateName)}
-                        strokeWidth={getStateStrokeWidth(stateName)}
-                        onMouseEnter={() => setHoveredState(stateName)}
-                        onMouseLeave={() => setHoveredState('')}
-                        style={{
-                          default: {
-                            outline: 'none',
-                          },
-                          hover: {
-                            outline: 'none',
-                            fill: activePracticeStates.includes(stateName) 
-                              ? '#2563EB' 
-                              : ptCompactStates.includes(stateName)
-                              ? '#4B5563'
-                              : '#F3F4F6',
-                            cursor: 'pointer',
-                          },
-                          pressed: {
-                            outline: 'none',
-                          },
-                        }}
-                      />
-                    );
-                  })
-                }
-              </Geographies>
-            </ComposableMap>
+          <div className="relative w-full" style={{ paddingBottom: '60%' }}>
+            <div className="absolute inset-0">
+              <ComposableMap
+                projection="geoAlbersUsa"
+                projectionConfig={{
+                  scale: 1000,
+                }}
+                width={1000}
+                height={600}
+                className="w-full h-full"
+              >
+                <Geographies geography={geoUrl}>
+                  {({ geographies }) =>
+                    geographies.map((geo) => {
+                      const stateName = geo.properties.name;
+                      return (
+                        <Geography
+                          key={geo.rsmKey}
+                          geography={geo}
+                          fill={getStateFill(stateName)}
+                          stroke={getStateStroke(stateName)}
+                          strokeWidth={getStateStrokeWidth(stateName)}
+                          onMouseEnter={() => setHoveredState(stateName)}
+                          onMouseLeave={() => setHoveredState('')}
+                          style={{
+                            default: {
+                              outline: 'none',
+                            },
+                            hover: {
+                              outline: 'none',
+                              fill: activePracticeStates.includes(stateName) 
+                                ? '#2563EB' 
+                                : ptCompactStates.includes(stateName)
+                                ? '#374151'
+                                : '#F9FAFB',
+                              cursor: 'pointer',
+                            },
+                            pressed: {
+                              outline: 'none',
+                            },
+                          }}
+                        />
+                      );
+                    })
+                  }
+                </Geographies>
+              </ComposableMap>
+            </div>
             
             {hoveredState && (
-              <div className="absolute top-4 left-4 bg-white p-3 rounded-lg shadow-lg border">
+              <div className="absolute top-4 left-4 bg-white p-3 rounded-lg shadow-lg border z-10">
                 <p className="font-semibold text-gray-900">{hoveredState}</p>
                 <p className="text-sm text-gray-600">{getStateStatus(hoveredState)}</p>
                 {activePracticeStates.includes(hoveredState) && (
