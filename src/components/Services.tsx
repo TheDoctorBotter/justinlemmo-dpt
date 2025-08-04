@@ -160,7 +160,9 @@ export const Services: React.FC<ServicesProps> = ({ user }) => {
                 
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{pkg.name}</h3>
                 <div className="mb-4">
-                  <span className="text-4xl font-bold text-gray-900">${pkg.price}</span>
+                  <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg inline-block">
+                    <span className="text-lg font-semibold">Coming Soon</span>
+                  </div>
                 </div>
                 <p className="text-gray-600 mb-6">{pkg.description}</p>
                 
@@ -174,22 +176,14 @@ export const Services: React.FC<ServicesProps> = ({ user }) => {
                 </ul>
                 
                 <button
-                  onClick={() => user ? handleCheckout(pkg.priceId) : setSelectedPackage(pkg.priceId)}
-                  disabled={checkoutLoading === pkg.priceId}
+                  disabled={true}
                   className={`w-full py-3 px-6 rounded-lg font-semibold transition-colors ${
                     pkg.name === 'Custom Recovery Plan'
-                      ? 'bg-blue-600 text-white hover:bg-blue-700'
-                      : 'bg-gray-900 text-white hover:bg-gray-800'
-                  } disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2`}
+                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                  } flex items-center justify-center space-x-2`}
                 >
-                  {checkoutLoading === pkg.priceId ? (
-                    <>
-                      <Loader2 className="h-5 w-5 animate-spin" />
-                      <span>Processing...</span>
-                    </>
-                  ) : (
-                    <span>{user ? 'Purchase Now' : 'Get Started'}</span>
-                  )}
+                  <span>Notify Me When Available</span>
                 </button>
               </div>
             </div>

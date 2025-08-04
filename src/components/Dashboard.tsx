@@ -110,84 +110,38 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
                 <h2 className="text-2xl font-bold text-gray-900">Current Plan</h2>
               </div>
 
-              {activeSubscription && subscriptionProduct ? (
-                <div className="border border-green-200 bg-green-50 rounded-xl p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <h3 className="text-xl font-semibold text-gray-900">{subscriptionProduct.name}</h3>
-                      <p className="text-green-600 font-medium">Active Subscription</p>
-                    </div>
-                    <CheckCircle className="h-8 w-8 text-green-500" />
-                  </div>
-                  <p className="text-gray-700 mb-4">{subscriptionProduct.description}</p>
-                  <div className="grid md:grid-cols-2 gap-4 text-sm">
-                    <div>
-                      <p className="text-gray-600">Next billing date:</p>
-                      <p className="font-medium">{formatDate(subscription.current_period_end)}</p>
-                    </div>
-                    <div>
-                      <p className="text-gray-600">Payment method:</p>
-                      <p className="font-medium">
-                        {subscription.payment_method_brand} •••• {subscription.payment_method_last4}
-                      </p>
-                    </div>
-                  </div>
+              <div className="border border-blue-200 bg-blue-50 rounded-xl p-6 text-center">
+                <Calendar className="h-12 w-12 text-blue-500 mx-auto mb-4" />
+                <h3 className="text-lg font-medium text-gray-900 mb-2">Services Coming Soon</h3>
+                <p className="text-gray-600 mb-4">
+                  Virtual physical therapy services will be available soon. Stay tuned for updates!
+                </p>
+                <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-lg inline-block">
+                  <span className="font-semibold">Launching Soon</span>
                 </div>
-              ) : (
-                <div className="border border-gray-200 rounded-xl p-6 text-center">
-                  <Calendar className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">No Active Subscription</h3>
-                  <p className="text-gray-600 mb-4">
-                    Choose a plan to start your virtual physical therapy journey
-                  </p>
-                  <a
-                    href="#services"
-                    className="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-                  >
-                    View Plans
-                  </a>
-                </div>
-              )}
+              </div>
             </div>
 
-            {/* Order History */}
+            {/* Contact Information */}
             <div className="bg-white rounded-2xl shadow-lg p-8">
               <div className="flex items-center mb-6">
                 <CreditCard className="h-8 w-8 text-blue-600 mr-3" />
-                <h2 className="text-2xl font-bold text-gray-900">Order History</h2>
+                <h2 className="text-2xl font-bold text-gray-900">Get Notified</h2>
               </div>
-
-              {orders.length > 0 ? (
-                <div className="space-y-4">
-                  {orders.map((order) => (
-                    <div key={order.order_id} className="border border-gray-200 rounded-lg p-4">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <p className="font-medium text-gray-900">Order #{order.order_id}</p>
-                          <p className="text-sm text-gray-600">{formatDate(order.order_date)}</p>
-                        </div>
-                        <div className="text-right">
-                          <p className="font-semibold text-gray-900">
-                            {formatCurrency(order.amount_total, order.currency)}
-                          </p>
-                          <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
-                            order.order_status === 'completed'
-                              ? 'bg-green-100 text-green-800'
-                              : 'bg-yellow-100 text-yellow-800'
-                          }`}>
-                            {order.order_status}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-8">
-                  <Clock className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-600">No orders yet</p>
-                </div>
-              )}
+              
+              <div className="text-center py-8">
+                <Clock className="h-12 w-12 text-blue-500 mx-auto mb-4" />
+                <h3 className="text-lg font-medium text-gray-900 mb-2">Be the First to Know</h3>
+                <p className="text-gray-600 mb-4">
+                  Sign up to be notified when virtual PT services become available
+                </p>
+                <a
+                  href="mailto:justinlemmodpt@gmail.com?subject=Notify me when services are available"
+                  className="inline-flex items-center bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                >
+                  Get Notified
+                </a>
+              </div>
             </div>
           </div>
 
@@ -212,27 +166,30 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
                   <p className="font-medium text-gray-900">Exercise Library</p>
                   <p className="text-sm text-gray-600">Browse video demonstrations</p>
                 </a>
-                <a
-                  href="#services"
+                <button
+                  disabled
                   className="block w-full text-left p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
                 >
-                  <p className="font-medium text-gray-900">Browse Services</p>
-                  <p className="text-sm text-gray-600">View all available packages</p>
-                </a>
+                  <p className="font-medium text-gray-500">Browse Services</p>
+                  <p className="text-sm text-gray-400">Coming soon</p>
+                </button>
               </div>
             </div>
 
-            {activeSubscription && (
-              <div className="bg-blue-50 rounded-2xl p-6 border border-blue-200">
-                <h3 className="text-lg font-semibold text-blue-900 mb-2">Next Steps</h3>
-                <p className="text-blue-800 text-sm mb-4">
-                  Dr. Lemmo will contact you within 24 hours to begin your {subscriptionProduct?.name}.
-                </p>
-                <p className="text-blue-700 text-xs">
-                  Check your email for appointment scheduling details.
-                </p>
-              </div>
-            )}
+            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-6 border border-blue-200">
+              <h3 className="text-lg font-semibold text-blue-900 mb-2">Stay Updated</h3>
+              <p className="text-blue-800 text-sm mb-4">
+                Virtual PT services are in development. Follow Dr. Lemmo's YouTube channel for updates and exercise content.
+              </p>
+              <a
+                href="https://www.youtube.com/@justinlemmodpt"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+              >
+                Subscribe on YouTube
+              </a>
+            </div>
           </div>
         </div>
       </div>
