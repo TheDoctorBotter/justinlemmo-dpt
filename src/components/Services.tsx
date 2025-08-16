@@ -1,22 +1,15 @@
 import React, { useState } from 'react';
 import { Check, MessageCircle, Calendar, Target, Loader2 } from 'lucide-react';
-import { supabase } from '../lib/supabase';
 import { stripeProducts } from '../stripe-config';
 
 interface ServicesProps {
   user: any;
+  onShowAuth: () => void;
 }
 
-export const Services: React.FC<ServicesProps> = ({ user }) => {
+export const Services: React.FC<ServicesProps> = ({ user, onShowAuth }) => {
   const [selectedPackage, setSelectedPackage] = useState<string>('');
   const [checkoutLoading, setCheckoutLoading] = useState<string>('');
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    condition: '',
-    message: ''
-  });
 
   const getPackageIcon = (name: string) => {
     switch (name) {
@@ -77,19 +70,30 @@ export const Services: React.FC<ServicesProps> = ({ user }) => {
   };
 
   const handleCheckout = async (priceId: string) => {
-    if (!user) return;
+    if (!user) {
+      onShowAuth();
+      return;
+    }
+    
+    if (!supabase) {
+      alert('Payment system is not configured. Please contact support.');
+      return;
+    }
     
     setCheckoutLoading(priceId);
     
     try {
+      const { supabase } = await import('../lib/supabase');
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
-        throw new Error('No active session');
+        onShowAuth();
+        return;
       }
 
       const product = stripeProducts.find(p => p.priceId === priceId);
       if (!product) {
-        throw new Error('Product not found');
+        alert('Product not found. Please try again.');
+        return;
       }
 
       const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/stripe-checkout`, {
@@ -109,7 +113,8 @@ export const Services: React.FC<ServicesProps> = ({ user }) => {
       const data = await response.json();
       
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to create checkout session');
+        alert(data.error || 'Failed to create checkout session. Please try again.');
+        return;
       }
 
       if (data.url) {
@@ -117,23 +122,12 @@ export const Services: React.FC<ServicesProps> = ({ user }) => {
       }
     } catch (error) {
       console.error('Checkout error:', error);
+      alert('An error occurred. Please try again or contact support.');
     } finally {
       setCheckoutLoading('');
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent, priceId: string) => {
-    e.preventDefault();
-    await handleCheckout(priceId);
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      condition: '',
-      message: ''
-    });
-    setSelectedPackage('');
-  };
 
   // Reorder products: Virtual PT Consult, 12 Week Guided Program, Custom Recovery Plan
   const orderedProducts = [
@@ -195,7 +189,7 @@ export const Services: React.FC<ServicesProps> = ({ user }) => {
                 </ul>
                 
                 <button
-                  onClick={() => user ? handleCheckout(pkg!.priceId) : setSelectedPackage(pkg!.priceId)}
+                  onClick={() => handleCheckout(pkg!.priceId)}
                   disabled={checkoutLoading === pkg!.priceId}
                   className={`w-full py-3 px-6 rounded-lg font-semibold transition-colors ${
                     pkg!.name === '12 Week Guided Program'
@@ -209,122 +203,13 @@ export const Services: React.FC<ServicesProps> = ({ user }) => {
                       <span>Processing...</span>
                     </>
                   ) : (
-                    <span>{user ? 'Get Started' : 'Sign Up & Get Started'}</span>
+                    <span>{user ? 'Get Started' : 'Sign In & Get Started'}</span>
                   )}
                 </button>
               </div>
             </div>
           ))}
         </div>
-
-        {/* Registration Form */}
-        {selectedPackage && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-            <div className="bg-white rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-2xl font-bold text-gray-900">
-                  Register for {stripeProducts.find(p => p.priceId === selectedPackage)?.name}
-                </h3>
-                <button
-                  onClick={() => setSelectedPackage('')}
-                  className="text-gray-400 hover:text-gray-600"
-                >
-                  ×
-                </button>
-              </div>
-              
-              <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                <p className="text-blue-800 text-sm">
-                  Please create an account or sign in to complete your purchase securely.
-                </p>
-              </div>
-              
-              <form onSubmit={(e) => handleSubmit(e, selectedPackage)}>
-                <div className="grid md:grid-cols-2 gap-6 mb-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    />
-                  </div>
-                </div>
-                
-                <div className="grid md:grid-cols-2 gap-6 mb-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Primary Condition/Concern
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.condition}
-                      onChange={(e) => setFormData({ ...formData, condition: e.target.value })}
-                      placeholder="e.g., Lower back pain, shoulder injury"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    />
-                  </div>
-                </div>
-                
-                <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Additional Information
-                  </label>
-                  <textarea
-                    rows={4}
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Please share any additional details about your condition, symptoms, or questions you have about PTBot recommendations..."
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                </div>
-                
-                <div className="flex gap-4">
-                  <button
-                    type="button"
-                    onClick={() => setSelectedPackage('')}
-                    className="flex-1 py-3 px-6 border border-gray-300 rounded-lg font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    className="flex-1 py-3 px-6 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-                  >
-                    Continue to Checkout
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );

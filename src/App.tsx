@@ -110,7 +110,7 @@ function App() {
     <div className="min-h-screen bg-white">
       <Header user={user} onSignOut={handleSignOut} />
       <Hero />
-      <Services user={user} />
+      <Services user={user} onShowAuth={() => setShowAuth(true)} />
       <StateMap />
       <Testimonials />
       <Disclaimers />
