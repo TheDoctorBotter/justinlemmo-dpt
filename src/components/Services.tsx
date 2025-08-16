@@ -140,10 +140,10 @@ export const Services: React.FC<ServicesProps> = ({ user }) => {
             <div
               key={pkg.priceId}
               className={`relative bg-white rounded-2xl shadow-lg border-2 transition-all duration-300 hover:shadow-xl ${
-                pkg.name === 'Custom Recovery Plan' ? 'border-blue-500 scale-105' : 'border-gray-200 hover:border-blue-300'
+                pkg.name === '3-Month Guided Program' ? 'border-blue-500 scale-105' : 'border-gray-200 hover:border-blue-300'
               }`}
             >
-              {pkg.name === 'Custom Recovery Plan' && (
+              {pkg.name === '3-Month Guided Program' && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                   <span className="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
                     Most Popular
@@ -153,15 +153,23 @@ export const Services: React.FC<ServicesProps> = ({ user }) => {
               
               <div className="p-8">
                 <div className={`inline-flex p-3 rounded-lg mb-4 ${
-                  pkg.name === 'Custom Recovery Plan' ? 'bg-blue-100 text-blue-600' : 'bg-gray-100 text-gray-600'
+                  pkg.name === '3-Month Guided Program' ? 'bg-blue-100 text-blue-600' : 'bg-gray-100 text-gray-600'
                 }`}>
                   {getPackageIcon(pkg.name)}
                 </div>
                 
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{pkg.name}</h3>
                 <div className="mb-4">
-                  <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-lg inline-block">
-                    <span className="text-lg font-semibold">Coming Soon</span>
+                  <div className="text-3xl font-bold text-gray-900">
+                    {pkg.name === 'Virtual PT Consult' && '$75'}
+                    {pkg.name === '3-Month Guided Program' && '$250'}
+                    {pkg.name === 'Custom Recovery Plan' && '$175'}
+                    <span className="text-lg font-normal text-gray-600 ml-1">
+                      {pkg.mode === 'subscription' ? '/month' : ''}
+                    </span>
+                  </div>
+                  <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 py-1 rounded-lg inline-block mt-2">
+                    <span className="text-sm font-semibold">Coming Soon</span>
                   </div>
                 </div>
                 <p className="text-gray-600 mb-6">{pkg.description}</p>
@@ -178,7 +186,7 @@ export const Services: React.FC<ServicesProps> = ({ user }) => {
                 <button
                   disabled={true}
                   className={`w-full py-3 px-6 rounded-lg font-semibold transition-colors ${
-                    pkg.name === 'Custom Recovery Plan'
+                    pkg.name === '3-Month Guided Program'
                       ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                       : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                   } flex items-center justify-center space-x-2`}
