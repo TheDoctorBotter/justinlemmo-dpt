@@ -19,9 +19,9 @@ export const stripeProducts: StripeProduct[] = [
   {
     id: 'prod_Snlflbz3KWUPV7',
     priceId: 'price_1RsA7pLBHhyJpJHOZVBbW412',
-    name: '3-Month Guided Program',
+    name: '12 Week Guided Program',
     description: 'Complete movement assessment, progressive exercise program, weekly check-ins and adjustments, unlimited messaging support, 3-month progress tracking, final reassessment and maintenance plan.',
-    mode: 'subscription',
+    mode: 'payment',
     comingSoon: true
   },
   {
