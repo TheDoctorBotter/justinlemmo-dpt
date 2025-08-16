@@ -19,8 +19,13 @@ function App() {
 
   useEffect(() => {
     // Check if we're on the success page
-    if (window.location.pathname === '/success') {
+    if (typeof window !== 'undefined' && window.location.pathname === '/success') {
       setShowSuccess(true);
+    }
+
+    if (!supabase) {
+      setLoading(false);
+      return;
     }
 
     // Get initial session
@@ -53,13 +58,17 @@ function App() {
     setShowSuccess(false);
     setShowAuth(false);
     // Redirect to home page
-    window.history.pushState({}, '', '/');
+    if (typeof window !== 'undefined') {
+      window.history.pushState({}, '', '/');
+    }
   };
 
   const handleSuccessContinue = () => {
     setShowSuccess(false);
     // Redirect to home page
-    window.history.pushState({}, '', '/');
+    if (typeof window !== 'undefined') {
+      window.history.pushState({}, '', '/');
+    }
   };
 
   if (loading) {

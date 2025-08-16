@@ -13,6 +13,11 @@ export const SuccessPage: React.FC<SuccessPageProps> = ({ onContinue }) => {
 
   useEffect(() => {
     const fetchLatestPurchase = async () => {
+      if (!supabase) {
+        setLoading(false);
+        return;
+      }
+
       try {
         // Check for subscription first
         const { data: subscription } = await supabase
