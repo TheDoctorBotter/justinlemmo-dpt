@@ -3,11 +3,7 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "installCommand": "npm ci",
-  "functions": {
-    "app/**": {
-      "runtime": "nodejs18.x"
-    }
-  },
+  "devCommand": "npm run dev",
   "rewrites": [
     {
       "source": "/(.*)",
