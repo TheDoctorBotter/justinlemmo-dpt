@@ -101,8 +101,8 @@ export const Services: React.FC<ServicesProps> = ({ user }) => {
         body: JSON.stringify({
           price_id: priceId,
           mode: product.mode,
-          success_url: `${window.location.origin}/success`,
-          cancel_url: `${window.location.origin}`,
+          success_url: `${typeof window !== 'undefined' ? window.location.origin : ''}/success`,
+          cancel_url: `${typeof window !== 'undefined' ? window.location.origin : ''}`,
         }),
       });
 

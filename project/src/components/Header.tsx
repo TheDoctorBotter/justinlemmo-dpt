@@ -9,6 +9,11 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ user, onSignOut }) => {
   const handleSignOut = async () => {
+    if (!supabase) {
+      onSignOut();
+      return;
+    }
+    
     await supabase.auth.signOut();
     onSignOut();
   };

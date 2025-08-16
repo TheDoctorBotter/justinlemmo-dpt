@@ -31,6 +31,11 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
 
   useEffect(() => {
     const fetchUserData = async () => {
+      if (!supabase) {
+        setLoading(false);
+        return;
+      }
+
       try {
         // Fetch subscription data
         const { data: subData } = await supabase

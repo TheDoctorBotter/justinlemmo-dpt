@@ -16,6 +16,12 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess, onSwitchToSignu
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!supabase) {
+      setError('Authentication service is not available');
+      return;
+    }
+    
     setLoading(true);
     setError('');
 
