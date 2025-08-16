@@ -24,7 +24,7 @@ export const Services: React.FC<ServicesProps> = ({ user }) => {
         return <MessageCircle className="h-8 w-8" />;
       case 'Custom Recovery Plan':
         return <Target className="h-8 w-8" />;
-      case '3-Month Guided Program':
+      case '12 Week Guided Program':
         return <Calendar className="h-8 w-8" />;
       default:
         return <MessageCircle className="h-8 w-8" />;
@@ -49,7 +49,7 @@ export const Services: React.FC<ServicesProps> = ({ user }) => {
           '2-week chat-based follow-up',
           'Plan modifications as needed'
         ];
-      case '3-Month Guided Program':
+      case '12 Week Guided Program':
         return [
           'Complete movement assessment',
           'Progressive exercise program',
@@ -140,10 +140,10 @@ export const Services: React.FC<ServicesProps> = ({ user }) => {
             <div
               key={pkg.priceId}
               className={`relative bg-white rounded-2xl shadow-lg border-2 transition-all duration-300 hover:shadow-xl ${
-                pkg.name === '3-Month Guided Program' ? 'border-blue-500 scale-105' : 'border-gray-200 hover:border-blue-300'
+                pkg.name === '12 Week Guided Program' ? 'border-blue-500 scale-105' : 'border-gray-200 hover:border-blue-300'
               }`}
             >
-              {pkg.name === '3-Month Guided Program' && (
+              {pkg.name === '12 Week Guided Program' && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                   <span className="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
                     Most Popular
@@ -153,7 +153,7 @@ export const Services: React.FC<ServicesProps> = ({ user }) => {
               
               <div className="p-8">
                 <div className={`inline-flex p-3 rounded-lg mb-4 ${
-                  pkg.name === '3-Month Guided Program' ? 'bg-blue-100 text-blue-600' : 'bg-gray-100 text-gray-600'
+                  pkg.name === '12 Week Guided Program' ? 'bg-blue-100 text-blue-600' : 'bg-gray-100 text-gray-600'
                 }`}>
                   {getPackageIcon(pkg.name)}
                 </div>
@@ -162,14 +162,8 @@ export const Services: React.FC<ServicesProps> = ({ user }) => {
                 <div className="mb-4">
                   <div className="text-3xl font-bold text-gray-900">
                     {pkg.name === 'Virtual PT Consult' && '$75'}
-                    {pkg.name === '3-Month Guided Program' && '$250'}
+                    {pkg.name === '12 Week Guided Program' && '$250'}
                     {pkg.name === 'Custom Recovery Plan' && '$175'}
-                    <span className="text-lg font-normal text-gray-600 ml-1">
-                      {pkg.mode === 'subscription' ? '/month' : ''}
-                    </span>
-                  </div>
-                  <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 py-1 rounded-lg inline-block mt-2">
-                    <span className="text-sm font-semibold">Coming Soon</span>
                   </div>
                 </div>
                 <p className="text-gray-600 mb-6">{pkg.description}</p>
@@ -184,14 +178,22 @@ export const Services: React.FC<ServicesProps> = ({ user }) => {
                 </ul>
                 
                 <button
-                  disabled={true}
+                  onClick={() => user ? handleCheckout(pkg.priceId) : setSelectedPackage(pkg.priceId)}
+                  disabled={checkoutLoading === pkg.priceId}
                   className={`w-full py-3 px-6 rounded-lg font-semibold transition-colors ${
-                    pkg.name === '3-Month Guided Program'
-                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                      : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    pkg.name === '12 Week Guided Program'
+                      ? 'bg-blue-600 text-white hover:bg-blue-700'
+                      : 'bg-gray-900 text-white hover:bg-gray-800'
                   } flex items-center justify-center space-x-2`}
                 >
-                  <span>Notify Me When Available</span>
+                  {checkoutLoading === pkg.priceId ? (
+                    <>
+                      <Loader2 className="h-5 w-5 animate-spin" />
+                      <span>Processing...</span>
+                    </>
+                  ) : (
+                    <span>{user ? 'Get Started' : 'Sign Up & Get Started'}</span>
+                  )}
                 </button>
               </div>
             </div>
