@@ -63,6 +63,15 @@ function App() {
     }
   };
 
+  const handleGoHome = () => {
+    // This will show the landing page instead of dashboard
+    if (typeof window !== 'undefined') {
+      window.history.pushState({}, '', '/');
+    }
+    // Force re-render by updating state
+    setShowSuccess(false);
+    setShowAuth(false);
+  };
   const handleSuccessContinue = () => {
     setShowSuccess(false);
     // Redirect to home page
@@ -100,7 +109,7 @@ function App() {
     return (
       <div className="min-h-screen bg-white">
         <Header user={user} onSignOut={handleSignOut} />
-        <Dashboard user={user} />
+        <Dashboard user={user} onGoHome={handleGoHome} />
       </div>
     );
   }
@@ -110,10 +119,10 @@ function App() {
     <div className="min-h-screen bg-white">
       <Header user={user} onSignOut={handleSignOut} onShowAuth={() => setShowAuth(true)} />
       <Hero />
-      <Services user={user} onShowAuth={() => setShowAuth(true)} />
+      <Services id="services" user={user} onShowAuth={() => setShowAuth(true)} />
       <StateMap />
-      <Testimonials />
-      <Disclaimers />
+      <Testimonials id="testimonials" />
+      <Disclaimers id="disclaimers" />
       <Footer />
     </div>
   );

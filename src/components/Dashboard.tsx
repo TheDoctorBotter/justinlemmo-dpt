@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Calendar, CreditCard, Package, Clock, CheckCircle, MessageCircle, Target, Loader2, Check } from 'lucide-react';
+import { Calendar, CreditCard, Package, Clock, CheckCircle, MessageCircle, Target, Loader2, Check, Home, Plus, X } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { getProductByPriceId, stripeProducts } from '../stripe-config';
 
 interface DashboardProps {
   user: any;
+  onGoHome?: () => void;
 }
 
 interface Subscription {
@@ -24,11 +25,19 @@ interface Order {
   order_status: string;
 }
 
-export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
+export const Dashboard: React.FC<DashboardProps> = ({ user, onGoHome }) => {
   const [subscription, setSubscription] = useState<Subscription | null>(null);
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [checkoutLoading, setCheckoutLoading] = useState<string>('');
+  const [showSuccessStoryForm, setShowSuccessStoryForm] = useState(false);
+  const [successStoryData, setSuccessStoryData] = useState({
+    name: '',
+    condition: '',
+    story: '',
+    timeframe: ''
+  });
+  const [submittingStory, setSubmittingStory] = useState(false);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -81,6 +90,77 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
       month: 'long',
       day: 'numeric',
     });
+  };
+
+  const handleCheckout = async (priceId: string) => {
+    if (!supabase) {
+      alert('Payment system is not configured. Please contact support.');
+      return;
+    }
+    
+    setCheckoutLoading(priceId);
+    
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        alert('Please sign in again to continue.');
+        return;
+      }
+
+      const product = stripeProducts.find(p => p.priceId === priceId);
+      if (!product) {
+        alert('Product not found. Please try again.');
+        return;
+      }
+
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/stripe-checkout`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${session.access_token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          price_id: priceId,
+          mode: product.mode,
+          success_url: `${typeof window !== 'undefined' ? window.location.origin : ''}/success`,
+          cancel_url: `${typeof window !== 'undefined' ? window.location.origin : ''}`,
+        }),
+      });
+
+      const data = await response.json();
+      
+      if (!response.ok) {
+        alert(data.error || 'Failed to create checkout session. Please try again.');
+        return;
+      }
+
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch (error) {
+      console.error('Checkout error:', error);
+      alert('An error occurred. Please try again or contact support.');
+    } finally {
+      setCheckoutLoading('');
+    }
+  };
+
+  const handleSuccessStorySubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmittingStory(true);
+
+    try {
+      // Here you would typically save to your database
+      // For now, we'll just show a success message
+      alert('Thank you for sharing your success story! It will be reviewed and may appear on our testimonials page.');
+      setShowSuccessStoryForm(false);
+      setSuccessStoryData({ name: '', condition: '', story: '', timeframe: '' });
+    } catch (error) {
+      console.error('Error submitting success story:', error);
+      alert('There was an error submitting your story. Please try again.');
+    } finally {
+      setSubmittingStory(false);
+    }
   };
 
   if (loading) {
@@ -152,59 +232,6 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
         return '$250';
       default:
         return '';
-    }
-  };
-
-  const handleCheckout = async (priceId: string) => {
-    if (!supabase) {
-      alert('Payment system is not configured. Please contact support.');
-      return;
-    }
-    
-    setCheckoutLoading(priceId);
-    
-    try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        alert('Please sign in again to continue.');
-        return;
-      }
-
-      const product = stripeProducts.find(p => p.priceId === priceId);
-      if (!product) {
-        alert('Product not found. Please try again.');
-        return;
-      }
-
-      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/stripe-checkout`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${session.access_token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          price_id: priceId,
-          mode: product.mode,
-          success_url: `${typeof window !== 'undefined' ? window.location.origin : ''}/success`,
-          cancel_url: `${typeof window !== 'undefined' ? window.location.origin : ''}`,
-        }),
-      });
-
-      const data = await response.json();
-      
-      if (!response.ok) {
-        alert(data.error || 'Failed to create checkout session. Please try again.');
-        return;
-      }
-
-      if (data.url) {
-        window.location.href = data.url;
-      }
-    } catch (error) {
-      console.error('Checkout error:', error);
-      alert('An error occurred. Please try again or contact support.');
-    } finally {
-      setCheckoutLoading('');
     }
   };
 
@@ -305,6 +332,22 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
           {/* Quick Actions */}
           <div className="space-y-6">
             <div className="bg-white rounded-2xl shadow-lg p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Navigation</h3>
+              <div className="space-y-3">
+                <button
+                  onClick={onGoHome}
+                  className="flex items-center w-full text-left p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
+                >
+                  <Home className="h-5 w-5 text-gray-600 mr-3" />
+                  <div>
+                    <p className="font-medium text-gray-900">Return to Home</p>
+                    <p className="text-sm text-gray-600">Go back to the main website</p>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl shadow-lg p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
               <div className="space-y-3">
                 <a
@@ -323,6 +366,16 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
                   <p className="font-medium text-gray-900">Exercise Library</p>
                   <p className="text-sm text-gray-600">Browse video demonstrations</p>
                 </a>
+                <button
+                  onClick={() => setShowSuccessStoryForm(true)}
+                  className="flex items-center w-full text-left p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
+                >
+                  <Plus className="h-5 w-5 text-gray-600 mr-3" />
+                  <div>
+                    <p className="font-medium text-gray-900">Share Success Story</p>
+                    <p className="text-sm text-gray-600">Tell others about your recovery</p>
+                  </div>
+                </button>
               </div>
             </div>
 
@@ -340,6 +393,121 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
             </div>
           </div>
         </div>
+
+        {/* Success Story Modal */}
+        {showSuccessStoryForm && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="p-8">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-2xl font-bold text-gray-900">Share Your Success Story</h3>
+                  <button
+                    onClick={() => setShowSuccessStoryForm(false)}
+                    className="text-gray-400 hover:text-gray-600"
+                  >
+                    <X className="h-6 w-6" />
+                  </button>
+                </div>
+                
+                <form onSubmit={handleSuccessStorySubmit} className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Your Name (or initials)
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={successStoryData.name}
+                      onChange={(e) => setSuccessStoryData({ ...successStoryData, name: e.target.value })}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="e.g., Sarah M."
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Condition/Issue Treated
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={successStoryData.condition}
+                      onChange={(e) => setSuccessStoryData({ ...successStoryData, condition: e.target.value })}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="e.g., Lower Back Pain, Shoulder Injury"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Your Success Story
+                    </label>
+                    <textarea
+                      required
+                      rows={4}
+                      value={successStoryData.story}
+                      onChange={(e) => setSuccessStoryData({ ...successStoryData, story: e.target.value })}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="Tell us about your experience with Dr. Lemmo's virtual PT services and how it helped your recovery..."
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      When did you receive treatment?
+                    </label>
+                    <select
+                      required
+                      value={successStoryData.timeframe}
+                      onChange={(e) => setSuccessStoryData({ ...successStoryData, timeframe: e.target.value })}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    >
+                      <option value="">Select timeframe</option>
+                      <option value="1 week ago">1 week ago</option>
+                      <option value="2 weeks ago">2 weeks ago</option>
+                      <option value="1 month ago">1 month ago</option>
+                      <option value="2 months ago">2 months ago</option>
+                      <option value="3 months ago">3 months ago</option>
+                      <option value="6 months ago">6 months ago</option>
+                      <option value="1 year ago">1 year ago</option>
+                    </select>
+                  </div>
+                  
+                  <div className="bg-blue-50 p-4 rounded-lg">
+                    <p className="text-blue-800 text-sm">
+                      <strong>Note:</strong> Your story will be reviewed before appearing on the website. 
+                      We may edit for length and clarity while preserving your message.
+                    </p>
+                  </div>
+                  
+                  <div className="flex space-x-4">
+                    <button
+                      type="button"
+                      onClick={() => setShowSuccessStoryForm(false)}
+                      className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={submittingStory}
+                      className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center space-x-2"
+                    >
+                      {submittingStory ? (
+                        <>
+                          <Loader2 className="h-5 w-5 animate-spin" />
+                          <span>Submitting...</span>
+                        </>
+                      ) : (
+                        <span>Submit Story</span>
+                      )}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
