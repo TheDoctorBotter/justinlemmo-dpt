@@ -6,9 +6,10 @@ interface HeaderProps {
   user: any;
   onSignOut: () => void;
   onShowAuth?: () => void;
+  onShowDashboard?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ user, onSignOut, onShowAuth }) => {
+export const Header: React.FC<HeaderProps> = ({ user, onSignOut, onShowAuth, onShowDashboard }) => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
 
   const handleSignOut = async () => {
@@ -28,6 +29,7 @@ export const Header: React.FC<HeaderProps> = ({ user, onSignOut, onShowAuth }) =
     }
     setShowMobileMenu(false);
   };
+
   return (
     <header className="bg-white shadow-sm border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -75,6 +77,14 @@ export const Header: React.FC<HeaderProps> = ({ user, onSignOut, onShowAuth }) =
             
             {user ? (
               <div className="flex items-center space-x-3">
+                {onShowDashboard && (
+                  <button
+                    onClick={onShowDashboard}
+                    className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                  >
+                    Dashboard
+                  </button>
+                )}
                 <div className="flex items-center space-x-2 text-gray-700">
                   <User className="h-5 w-5" />
                   <span className="hidden sm:inline text-sm">{user.email}</span>
@@ -128,6 +138,14 @@ export const Header: React.FC<HeaderProps> = ({ user, onSignOut, onShowAuth }) =
               >
                 Legal
               </button>
+              {user && onShowDashboard && (
+                <button
+                  onClick={onShowDashboard}
+                  className="text-left bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                >
+                  Dashboard
+                </button>
+              )}
             </div>
           </nav>
         )}

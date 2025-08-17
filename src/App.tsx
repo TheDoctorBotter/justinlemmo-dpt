@@ -16,6 +16,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showAuth, setShowAuth] = useState(false);
+  const [showDashboard, setShowDashboard] = useState(false);
 
   useEffect(() => {
     // Check if we're on the success page
@@ -64,12 +65,11 @@ function App() {
   };
 
   const handleGoHome = () => {
-    // This will show the landing page instead of dashboard
+    setShowDashboard(false);
+    setShowSuccess(false);
+    setShowAuth(false);
     if (typeof window !== 'undefined') {
       window.history.pushState({}, '', '/');
-    }
-    // Force re-render by updating state
-    setShowSuccess(false);
     setShowAuth(false);
   };
   const handleSuccessContinue = () => {
@@ -77,6 +77,13 @@ function App() {
     // Redirect to home page
     if (typeof window !== 'undefined') {
       window.history.pushState({}, '', '/');
+    }
+  };
+
+  const handleShowDashboard = () => {
+    setShowDashboard(true);
+    if (typeof window !== 'undefined') {
+      window.history.pushState({}, '', '/dashboard');
     }
   };
 
@@ -105,7 +112,7 @@ function App() {
   }
 
   // Show dashboard for authenticated users
-  if (user && !showSuccess) {
+  if (user && showDashboard && !showSuccess) {
     return (
       <div className="min-h-screen bg-white">
         <Header user={user} onSignOut={handleSignOut} />
@@ -117,11 +124,16 @@ function App() {
   // Show landing page for non-authenticated users
   return (
     <div className="min-h-screen bg-white">
-      <Header user={user} onSignOut={handleSignOut} onShowAuth={() => setShowAuth(true)} />
+      <Header 
+        user={user} 
+        onSignOut={handleSignOut} 
+        onShowAuth={() => setShowAuth(true)}
+        onShowDashboard={user ? handleShowDashboard : undefined}
+      />
       <Hero />
       <Services id="services" user={user} onShowAuth={() => setShowAuth(true)} />
       <StateMap />
-      <Testimonials id="testimonials" />
+      <Testimonials id="testimonials" user={user} onShowAuth={() => setShowAuth(true)} />
       <Disclaimers id="disclaimers" />
       <Footer />
     </div>
