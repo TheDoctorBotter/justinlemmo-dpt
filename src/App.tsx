@@ -70,6 +70,7 @@ function App() {
     setShowAuth(false);
     if (typeof window !== 'undefined') {
       window.history.pushState({}, '', '/');
+    }
     setShowAuth(false);
   };
   const handleSuccessContinue = () => {
