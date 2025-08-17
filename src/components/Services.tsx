@@ -76,15 +76,14 @@ export const Services: React.FC<ServicesProps> = ({ user, onShowAuth, id }) => {
       return;
     }
     
-    if (!supabase) {
-      alert('Payment system is not configured. Please contact support.');
-      return;
-    }
-    
     setCheckoutLoading(priceId);
     
     try {
-      const { supabase } = await import('../lib/supabase');
+      if (!supabase) {
+        alert('Payment system is not configured. Please contact support.');
+        return;
+      }
+      
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
         onShowAuth();
