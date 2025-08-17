@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stethoscope, Youtube, User, LogOut } from 'lucide-react';
+import { Stethoscope, Youtube, User, LogOut, Menu, X } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 interface HeaderProps {
@@ -9,6 +9,8 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ user, onSignOut, onShowAuth }) => {
+  const [showMobileMenu, setShowMobileMenu] = React.useState(false);
+
   const handleSignOut = async () => {
     if (!supabase) {
       onSignOut();
@@ -19,6 +21,13 @@ export const Header: React.FC<HeaderProps> = ({ user, onSignOut, onShowAuth }) =
     onSignOut();
   };
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setShowMobileMenu(false);
+  };
   return (
     <header className="bg-white shadow-sm border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -30,6 +39,29 @@ export const Header: React.FC<HeaderProps> = ({ user, onSignOut, onShowAuth }) =
               <p className="text-sm text-gray-600">Doctor of Physical Therapy</p>
             </div>
           </div>
+          
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-6">
+            <button
+              onClick={() => scrollToSection('services')}
+              className="text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              Recovery Plans
+            </button>
+            <button
+              onClick={() => scrollToSection('testimonials')}
+              className="text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              Testimonials
+            </button>
+            <button
+              onClick={() => scrollToSection('disclaimers')}
+              className="text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              Legal
+            </button>
+          </nav>
+
           <div className="flex items-center space-x-4">
             <a
               href="https://www.youtube.com/@justinlemmodpt"
@@ -63,8 +95,42 @@ export const Header: React.FC<HeaderProps> = ({ user, onSignOut, onShowAuth }) =
                 Sign In
               </button>
             )}
+            
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setShowMobileMenu(!showMobileMenu)}
+              className="md:hidden p-2 text-gray-600 hover:text-gray-900"
+            >
+              {showMobileMenu ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
           </div>
         </div>
+        
+        {/* Mobile Navigation */}
+        {showMobileMenu && (
+          <nav className="md:hidden mt-4 pb-4 border-t border-gray-100 pt-4">
+            <div className="flex flex-col space-y-3">
+              <button
+                onClick={() => scrollToSection('services')}
+                className="text-left text-gray-600 hover:text-gray-900 transition-colors py-2"
+              >
+                Recovery Plans
+              </button>
+              <button
+                onClick={() => scrollToSection('testimonials')}
+                className="text-left text-gray-600 hover:text-gray-900 transition-colors py-2"
+              >
+                Testimonials
+              </button>
+              <button
+                onClick={() => scrollToSection('disclaimers')}
+                className="text-left text-gray-600 hover:text-gray-900 transition-colors py-2"
+              >
+                Legal
+              </button>
+            </div>
+          </nav>
+        )}
       </div>
     </header>
   );
