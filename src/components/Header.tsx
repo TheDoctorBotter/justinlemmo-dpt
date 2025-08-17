@@ -5,9 +5,10 @@ import { supabase } from '../lib/supabase';
 interface HeaderProps {
   user: any;
   onSignOut: () => void;
+  onShowAuth?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ user, onSignOut }) => {
+export const Header: React.FC<HeaderProps> = ({ user, onSignOut, onShowAuth }) => {
   const handleSignOut = async () => {
     if (!supabase) {
       onSignOut();
@@ -40,7 +41,7 @@ export const Header: React.FC<HeaderProps> = ({ user, onSignOut }) => {
               <span className="hidden sm:inline">Exercise Library</span>
             </a>
             
-            {user && (
+            {user ? (
               <div className="flex items-center space-x-3">
                 <div className="flex items-center space-x-2 text-gray-700">
                   <User className="h-5 w-5" />
@@ -54,6 +55,13 @@ export const Header: React.FC<HeaderProps> = ({ user, onSignOut }) => {
                   <span className="hidden sm:inline text-sm">Sign Out</span>
                 </button>
               </div>
+            ) : (
+              <button
+                onClick={onShowAuth}
+                className="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+              >
+                Sign In
+              </button>
             )}
           </div>
         </div>

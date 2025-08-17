@@ -108,7 +108,7 @@ function App() {
   // Show landing page for non-authenticated users
   return (
     <div className="min-h-screen bg-white">
-      <Header user={user} onSignOut={handleSignOut} />
+      <Header user={user} onSignOut={handleSignOut} onShowAuth={() => setShowAuth(true)} />
       <Hero />
       <Services user={user} onShowAuth={() => setShowAuth(true)} />
       <StateMap />
