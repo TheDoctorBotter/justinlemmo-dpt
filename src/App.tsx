@@ -70,8 +70,8 @@ function App() {
     setShowAuth(false);
     if (typeof window !== 'undefined') {
       window.history.pushState({}, '', '/');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    setShowAuth(false);
   };
   const handleSuccessContinue = () => {
     setShowSuccess(false);

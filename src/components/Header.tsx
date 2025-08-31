@@ -30,17 +30,25 @@ export const Header: React.FC<HeaderProps> = ({ user, onSignOut, onShowAuth, onS
     setShowMobileMenu(false);
   };
 
+  const handleLogoClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setShowMobileMenu(false);
+  };
+
   return (
     <header className="bg-white shadow-sm border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div className="flex justify-between items-center">
-          <div className="flex items-center space-x-2">
+          <button 
+            onClick={handleLogoClick}
+            className="flex items-center space-x-2 hover:opacity-80 transition-opacity"
+          >
             <Stethoscope className="h-8 w-8 text-blue-600" />
             <div>
               <h1 className="text-xl font-bold text-gray-900">Dr. Justin Lemmo</h1>
               <p className="text-sm text-gray-600">Doctor of Physical Therapy</p>
             </div>
-          </div>
+          </button>
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
