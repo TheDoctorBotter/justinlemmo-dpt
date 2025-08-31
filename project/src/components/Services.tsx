@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Check, MessageCircle, Calendar, Target, Loader2 } from 'lucide-react';
 import { stripeProducts } from '../stripe-config';
+import { supabase } from '../lib/supabase';
 
 interface ServicesProps {
   user: any;
@@ -76,15 +77,14 @@ export const Services: React.FC<ServicesProps> = ({ user, onShowAuth, id }) => {
       return;
     }
     
-    if (!supabase) {
-      alert('Payment system is not configured. Please contact support.');
-      return;
-    }
-    
     setCheckoutLoading(priceId);
     
     try {
-      const { supabase } = await import('../lib/supabase');
+      if (!supabase) {
+        alert('Payment system is not configured. Please contact support.');
+        return;
+      }
+      
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
         onShowAuth();
