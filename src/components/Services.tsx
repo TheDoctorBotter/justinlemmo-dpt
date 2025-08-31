@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Check, MessageCircle, Calendar, Target, Loader2 } from 'lucide-react';
 import { stripeProducts } from '../stripe-config';
+import { supabase } from '../lib/supabase';
 
 interface ServicesProps {
   user: any;
