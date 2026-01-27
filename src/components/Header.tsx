@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stethoscope, Youtube, User, LogOut, Menu, X } from 'lucide-react';
+import { Stethoscope, User, LogOut, Menu, X, Phone } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 interface HeaderProps {
@@ -39,14 +39,14 @@ export const Header: React.FC<HeaderProps> = ({ user, onSignOut, onShowAuth, onS
     <header className="bg-white shadow-sm border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div className="flex justify-between items-center">
-          <button 
+          <button
             onClick={handleLogoClick}
             className="flex items-center space-x-2 hover:opacity-80 transition-opacity"
           >
             <Stethoscope className="h-8 w-8 text-blue-600" />
             <div>
-              <h1 className="text-xl font-bold text-gray-900">Dr. Justin Lemmo</h1>
-              <p className="text-sm text-gray-600">Doctor of Physical Therapy</p>
+              <h1 className="text-xl font-bold text-gray-900">Buckeye Physical Therapy</h1>
+              <p className="text-sm text-gray-600">Justin Lemmo, PT, DPT</p>
             </div>
           </button>
           
@@ -56,31 +56,29 @@ export const Header: React.FC<HeaderProps> = ({ user, onSignOut, onShowAuth, onS
               onClick={() => scrollToSection('services')}
               className="text-gray-600 hover:text-gray-900 transition-colors"
             >
-              Recovery Plans
+              Services
             </button>
             <button
-              onClick={() => scrollToSection('testimonials')}
+              onClick={() => scrollToSection('about')}
               className="text-gray-600 hover:text-gray-900 transition-colors"
             >
-              Testimonials
+              About
             </button>
             <button
-              onClick={() => scrollToSection('disclaimers')}
+              onClick={() => scrollToSection('contact')}
               className="text-gray-600 hover:text-gray-900 transition-colors"
             >
-              Legal
+              Contact
             </button>
           </nav>
 
           <div className="flex items-center space-x-4">
             <a
-              href="https://www.youtube.com/@justinlemmodpt"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-2 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors"
+              href="tel:956-476-5310"
+              className="flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
             >
-              <Youtube className="h-5 w-5" />
-              <span className="hidden sm:inline">Exercise Library</span>
+              <span className="hidden sm:inline">Call Now: (956) 476-5310</span>
+              <span className="sm:hidden">Call</span>
             </a>
             
             {user ? (
@@ -132,28 +130,26 @@ export const Header: React.FC<HeaderProps> = ({ user, onSignOut, onShowAuth, onS
                 onClick={() => scrollToSection('services')}
                 className="text-left text-gray-600 hover:text-gray-900 transition-colors py-2"
               >
-                Recovery Plans
+                Services
               </button>
               <button
-                onClick={() => scrollToSection('testimonials')}
+                onClick={() => scrollToSection('about')}
                 className="text-left text-gray-600 hover:text-gray-900 transition-colors py-2"
               >
-                Testimonials
+                About
               </button>
               <button
-                onClick={() => scrollToSection('disclaimers')}
+                onClick={() => scrollToSection('contact')}
                 className="text-left text-gray-600 hover:text-gray-900 transition-colors py-2"
               >
-                Legal
+                Contact
               </button>
-              {user && onShowDashboard && (
-                <button
-                  onClick={onShowDashboard}
-                  className="text-left bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-                >
-                  Dashboard
-                </button>
-              )}
+              <a
+                href="tel:956-476-5310"
+                className="text-left text-green-600 hover:text-green-700 transition-colors py-2 font-semibold"
+              >
+                Call: (956) 476-5310
+              </a>
             </div>
           </nav>
         )}
