@@ -17,7 +17,7 @@ export class EmailService {
   private fromEmail: string;
   private fromName: string;
 
-  constructor(apiKey: string, fromEmail: string = 'noreply@justinlemmodpt.com', fromName: string = 'PTBot Team') {
+  constructor(apiKey: string, fromEmail: string = 'noreply@buckeyephysicaltherapy.com', fromName: string = 'Buckeye Physical Therapy') {
     this.resend = new Resend(apiKey);
     this.fromEmail = fromEmail;
     this.fromName = fromName;
@@ -31,61 +31,60 @@ export class EmailService {
         hasApiKey: !!this.resend,
         verificationUrl: `${data.appUrl}/verify-email?token=${data.verificationToken}`
       });
-      
+
       const verificationUrl = `${data.appUrl}/verify-email?token=${data.verificationToken}`;
-      
+
       const { error } = await this.resend.emails.send({
         from: `${this.fromName} <${this.fromEmail}>`,
         to: data.to,
-        subject: 'Verify Your PTBot Account',
+        subject: 'Verify Your Buckeye Physical Therapy Account',
         html: `
           <!DOCTYPE html>
           <html>
             <head>
               <meta charset="utf-8">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>Verify Your PTBot Account</title>
+              <title>Verify Your Buckeye Physical Therapy Account</title>
             </head>
             <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
               <div style="background: linear-gradient(135deg, #2563EB, #1D4ED8); padding: 30px; border-radius: 10px; text-align: center; margin-bottom: 30px;">
-                <h1 style="color: white; margin: 0; font-size: 28px;">Welcome to PTBot!</h1>
-                <p style="color: #BFDBFE; margin: 10px 0 0 0; font-size: 16px;">Your Virtual Physical Therapy Assistant</p>
+                <h1 style="color: white; margin: 0; font-size: 28px;">Welcome to Buckeye Physical Therapy!</h1>
+                <p style="color: #BFDBFE; margin: 10px 0 0 0; font-size: 16px;">Quality Care. Real Results.</p>
               </div>
-              
+
               <div style="background: #f8f9fa; padding: 25px; border-radius: 8px; margin-bottom: 25px;">
                 <h2 style="color: #2563EB; margin-top: 0;">Hi ${data.firstName}!</h2>
-                <p>Thank you for creating your PTBot account. To get started with your personalized physical therapy journey, please verify your email address.</p>
-                
+                <p>Thank you for creating your account with Buckeye Physical Therapy. To get started, please verify your email address.</p>
+
                 <div style="text-align: center; margin: 30px 0;">
-                  <a href="${verificationUrl}" 
+                  <a href="${verificationUrl}"
                      style="background: #2563EB; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block; font-size: 16px;">
                     Verify My Email
                   </a>
                 </div>
-                
+
                 <p style="font-size: 14px; color: #666;">
                   If the button doesn't work, copy and paste this link into your browser:<br>
                   <a href="${verificationUrl}" style="color: #2563EB; word-break: break-all;">${verificationUrl}</a>
                 </p>
               </div>
-              
+
               <div style="background: #EBF4FF; padding: 20px; border-radius: 8px; border-left: 4px solid #2563EB;">
-                <h3 style="color: #2563EB; margin-top: 0;">What's Next?</h3>
+                <h3 style="color: #2563EB; margin-top: 0;">Contact Us</h3>
                 <ul style="margin: 0; padding-left: 20px;">
-                  <li>Complete your symptom assessment</li>
-                  <li>Get personalized exercise recommendations</li>
-                  <li>Track your recovery progress</li>
-                  <li>Chat with PTBot for guidance</li>
+                  <li>Phone: (956) 476-5310</li>
+                  <li>Email: buckeyephysicaltherapy@gmail.com</li>
+                  <li>Location: Coming Soon to Edinburg, TX</li>
                 </ul>
               </div>
-              
+
               <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
                 <p style="font-size: 12px; color: #999;">
                   This verification link will expire in 24 hours.<br>
                   If you didn't create this account, please ignore this email.
                 </p>
                 <p style="font-size: 12px; color: #999;">
-                  © 2025 PTBot - Your Virtual Physical Therapy Assistant
+                  &copy; ${new Date().getFullYear()} Buckeye Physical Therapy - Justin Lemmo, PT, DPT
                 </p>
               </div>
             </body>
@@ -119,55 +118,60 @@ export class EmailService {
       const { error } = await this.resend.emails.send({
         from: `${this.fromName} <${this.fromEmail}>`,
         to: data.to,
-        subject: 'Welcome to PTBot - Your Recovery Journey Starts Now!',
+        subject: 'Welcome to Buckeye Physical Therapy!',
         html: `
           <!DOCTYPE html>
           <html>
             <head>
               <meta charset="utf-8">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>Welcome to PTBot</title>
+              <title>Welcome to Buckeye Physical Therapy</title>
             </head>
             <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
               <div style="background: linear-gradient(135deg, #10B981, #059669); padding: 30px; border-radius: 10px; text-align: center; margin-bottom: 30px;">
-                <h1 style="color: white; margin: 0; font-size: 28px;">🎉 Account Verified!</h1>
-                <p style="color: #A7F3D0; margin: 10px 0 0 0; font-size: 16px;">Welcome to PTBot, ${data.firstName}!</p>
+                <h1 style="color: white; margin: 0; font-size: 28px;">Account Verified!</h1>
+                <p style="color: #A7F3D0; margin: 10px 0 0 0; font-size: 16px;">Welcome to Buckeye Physical Therapy, ${data.firstName}!</p>
               </div>
-              
+
               <div style="background: #f8f9fa; padding: 25px; border-radius: 8px; margin-bottom: 25px;">
-                <h2 style="color: #10B981; margin-top: 0;">Your Recovery Journey Starts Now</h2>
-                <p>Your email has been successfully verified! You now have full access to all PTBot features:</p>
-                
+                <h2 style="color: #10B981; margin-top: 0;">Your Recovery Journey Starts Here</h2>
+                <p>Your email has been successfully verified! We look forward to helping you with your physical therapy needs.</p>
+
                 <div style="margin: 25px 0;">
-                  <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                    <span style="background: #10B981; color: white; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; margin-right: 10px; font-size: 12px;">✓</span>
-                    <strong>AI-Powered Chat</strong> - Get instant answers about your symptoms
+                  <h3 style="color: #333;">Our Services Include:</h3>
+                  <div style="margin-bottom: 10px;">
+                    <strong>Auto Accident Rehabilitation</strong> - Comprehensive care for motor vehicle injuries
                   </div>
-                  <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                    <span style="background: #10B981; color: white; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; margin-right: 10px; font-size: 12px;">✓</span>
-                    <strong>Symptom Assessment</strong> - Track your condition with detailed evaluations
+                  <div style="margin-bottom: 10px;">
+                    <strong>Work Injury Recovery</strong> - Get back to work safely
                   </div>
-                  <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                    <span style="background: #10B981; color: white; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; margin-right: 10px; font-size: 12px;">✓</span>
-                    <strong>Exercise Library</strong> - Access professional PT exercises
+                  <div style="margin-bottom: 10px;">
+                    <strong>Orthopedic Rehabilitation</strong> - Expert musculoskeletal care
                   </div>
-                  <div style="display: flex; align-items: center;">
-                    <span style="background: #10B981; color: white; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; margin-right: 10px; font-size: 12px;">✓</span>
-                    <strong>Progress Tracking</strong> - Monitor your recovery over time
+                  <div>
+                    <strong>General Physical Therapy</strong> - Personalized treatment plans
                   </div>
                 </div>
               </div>
-              
+
               <div style="background: #FEF3C7; padding: 20px; border-radius: 8px; border-left: 4px solid #F59E0B; margin-bottom: 25px;">
-                <h3 style="color: #92400E; margin-top: 0;">🏥 Texas Residents</h3>
+                <h3 style="color: #92400E; margin-top: 0;">Payment Options</h3>
                 <p style="color: #92400E; margin: 0;">
-                  You can book virtual consultations with Dr. Justin Lemmo, PT, DPT for personalized treatment plans!
+                  We accept attorney liens and private pay. Contact us to learn more about your options.
                 </p>
               </div>
-              
+
+              <div style="background: #EBF4FF; padding: 20px; border-radius: 8px; border-left: 4px solid #2563EB;">
+                <h3 style="color: #2563EB; margin-top: 0;">Schedule Your Appointment</h3>
+                <p>
+                  <strong>Phone:</strong> (956) 476-5310<br>
+                  <strong>Email:</strong> buckeyephysicaltherapy@gmail.com
+                </p>
+              </div>
+
               <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
                 <p style="font-size: 12px; color: #999;">
-                  © 2025 PTBot - Your Virtual Physical Therapy Assistant
+                  &copy; ${new Date().getFullYear()} Buckeye Physical Therapy - Justin Lemmo, PT, DPT
                 </p>
               </div>
             </body>
@@ -190,54 +194,54 @@ export class EmailService {
   async sendPasswordResetEmail(to: string, firstName: string, resetToken: string, appUrl: string): Promise<boolean> {
     try {
       const resetUrl = `${appUrl}/reset-password?token=${resetToken}`;
-      
+
       const { error } = await this.resend.emails.send({
         from: `${this.fromName} <${this.fromEmail}>`,
         to,
-        subject: 'Reset Your PTBot Password',
+        subject: 'Reset Your Buckeye Physical Therapy Password',
         html: `
           <!DOCTYPE html>
           <html>
             <head>
               <meta charset="utf-8">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>Reset Your PTBot Password</title>
+              <title>Reset Your Password</title>
             </head>
             <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
               <div style="background: linear-gradient(135deg, #EF4444, #DC2626); padding: 30px; border-radius: 10px; text-align: center; margin-bottom: 30px;">
-                <h1 style="color: white; margin: 0; font-size: 28px;">🔒 Password Reset</h1>
-                <p style="color: #FECACA; margin: 10px 0 0 0; font-size: 16px;">PTBot Account Security</p>
+                <h1 style="color: white; margin: 0; font-size: 28px;">Password Reset</h1>
+                <p style="color: #FECACA; margin: 10px 0 0 0; font-size: 16px;">Buckeye Physical Therapy Account Security</p>
               </div>
-              
+
               <div style="background: #f8f9fa; padding: 25px; border-radius: 8px; margin-bottom: 25px;">
                 <h2 style="color: #EF4444; margin-top: 0;">Hi ${firstName},</h2>
-                <p>We received a request to reset your PTBot account password. Click the button below to create a new password:</p>
-                
+                <p>We received a request to reset your Buckeye Physical Therapy account password. Click the button below to create a new password:</p>
+
                 <div style="text-align: center; margin: 30px 0;">
-                  <a href="${resetUrl}" 
+                  <a href="${resetUrl}"
                      style="background: #EF4444; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block; font-size: 16px;">
                     Reset My Password
                   </a>
                 </div>
-                
+
                 <p style="font-size: 14px; color: #666;">
                   If the button doesn't work, copy and paste this link into your browser:<br>
                   <a href="${resetUrl}" style="color: #EF4444; word-break: break-all;">${resetUrl}</a>
                 </p>
               </div>
-              
+
               <div style="background: #FEE2E2; padding: 20px; border-radius: 8px; border-left: 4px solid #EF4444;">
-                <h3 style="color: #DC2626; margin-top: 0;">⚠️ Security Notice</h3>
+                <h3 style="color: #DC2626; margin-top: 0;">Security Notice</h3>
                 <ul style="margin: 0; padding-left: 20px; color: #DC2626;">
                   <li>This link will expire in 1 hour</li>
                   <li>If you didn't request this reset, ignore this email</li>
                   <li>Your current password remains unchanged until you create a new one</li>
                 </ul>
               </div>
-              
+
               <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
                 <p style="font-size: 12px; color: #999;">
-                  © 2025 PTBot - Your Virtual Physical Therapy Assistant
+                  &copy; ${new Date().getFullYear()} Buckeye Physical Therapy - Justin Lemmo, PT, DPT
                 </p>
               </div>
             </body>

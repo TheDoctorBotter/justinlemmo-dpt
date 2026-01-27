@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "ptbot-app",
-    "slug": "ptbot-app",
+    "name": "buckeye-physical-therapy",
+    "slug": "buckeye-physical-therapy",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

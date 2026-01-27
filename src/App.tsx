@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { Services } from './components/Services';
-import { StateMap } from './components/StateMap';
 import { Disclaimers } from './components/Disclaimers';
 import { Testimonials } from './components/Testimonials';
 import { Footer } from './components/Footer';
@@ -132,9 +131,8 @@ function App() {
         onShowDashboard={user ? handleShowDashboard : undefined}
       />
       <Hero />
-      <Services id="services" user={user} onShowAuth={() => setShowAuth(true)} />
-      <StateMap />
-      <Testimonials id="testimonials" user={user} onShowAuth={() => setShowAuth(true)} />
+      <Services id="services" />
+      <Testimonials id="testimonials" />
       <Disclaimers id="disclaimers" />
       <Footer />
     </div>
