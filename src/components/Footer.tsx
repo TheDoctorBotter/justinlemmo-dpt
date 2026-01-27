@@ -8,7 +8,7 @@ export const Footer = () => {
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <Stethoscope className="h-8 w-8 text-blue-400" />
+              <Stethoscope className="h-8 w-8 text-[#BB0000]" />
               <div>
                 <h3 className="text-xl font-bold">Buckeye Physical Therapy</h3>
                 <p className="text-gray-400">Justin Lemmo, PT, DPT</p>
@@ -24,7 +24,7 @@ export const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Contact Information</h4>
             <div className="space-y-3">
               <div className="flex items-center">
-                <Phone className="h-5 w-5 text-blue-400 mr-3" />
+                <Phone className="h-5 w-5 text-[#BB0000] mr-3" />
                 <a
                   href="tel:956-476-5310"
                   className="text-gray-300 hover:text-white transition-colors"
@@ -33,7 +33,7 @@ export const Footer = () => {
                 </a>
               </div>
               <div className="flex items-center">
-                <Mail className="h-5 w-5 text-blue-400 mr-3" />
+                <Mail className="h-5 w-5 text-[#BB0000] mr-3" />
                 <a
                   href="mailto:buckeyephysicaltherapy@gmail.com"
                   className="text-gray-300 hover:text-white transition-colors"
@@ -42,7 +42,7 @@ export const Footer = () => {
                 </a>
               </div>
               <div className="flex items-start">
-                <MapPin className="h-5 w-5 text-blue-400 mr-3 mt-0.5" />
+                <MapPin className="h-5 w-5 text-[#BB0000] mr-3 mt-0.5" />
                 <span className="text-gray-300">
                   Coming Soon to Edinburg, TX
                 </span>
@@ -54,13 +54,13 @@ export const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Legal & Licensing</h4>
             <div className="space-y-3">
               <div className="flex items-center">
-                <Shield className="h-5 w-5 text-green-400 mr-3" />
+                <Shield className="h-5 w-5 text-gray-400 mr-3" />
                 <span className="text-gray-300 text-sm">
                   Texas PT License #1215276
                 </span>
               </div>
               <div className="flex items-center">
-                <FileText className="h-5 w-5 text-blue-400 mr-3" />
+                <FileText className="h-5 w-5 text-gray-400 mr-3" />
                 <span className="text-gray-300 text-sm">
                   HIPAA Compliant Services
                 </span>

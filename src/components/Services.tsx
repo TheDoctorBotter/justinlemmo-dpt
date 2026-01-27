@@ -10,38 +10,36 @@ const services = [
     icon: Car,
     title: 'Auto Accident Rehabilitation',
     description: 'Comprehensive treatment for injuries sustained in motor vehicle accidents. We help you recover from whiplash, back injuries, and other trauma.',
-    color: 'blue',
+    color: 'scarlet',
   },
   {
     icon: Briefcase,
     title: 'Work Injury Recovery',
     description: 'Specialized care for workplace injuries. We work with you and your employer to get you back to work safely and efficiently.',
-    color: 'green',
+    color: 'gray',
   },
   {
     icon: Activity,
     title: 'Orthopedic Rehabilitation',
     description: 'Expert treatment for musculoskeletal conditions including back pain, neck pain, shoulder injuries, knee problems, and post-surgical recovery.',
-    color: 'purple',
+    color: 'black',
   },
   {
     icon: Heart,
     title: 'General Physical Therapy',
     description: 'Personalized treatment plans for a wide range of conditions. Whether recovering from surgery or managing chronic pain, we are here to help.',
-    color: 'red',
+    color: 'scarlet',
   },
 ];
 
 const getColorClasses = (color: string) => {
   switch (color) {
-    case 'blue':
-      return { bg: 'bg-blue-100', text: 'text-blue-600' };
-    case 'green':
-      return { bg: 'bg-green-100', text: 'text-green-600' };
-    case 'purple':
-      return { bg: 'bg-purple-100', text: 'text-purple-600' };
-    case 'red':
-      return { bg: 'bg-red-100', text: 'text-red-600' };
+    case 'scarlet':
+      return { bg: 'bg-[#BB0000]', text: 'text-white' };
+    case 'gray':
+      return { bg: 'bg-gray-600', text: 'text-white' };
+    case 'black':
+      return { bg: 'bg-gray-900', text: 'text-white' };
     default:
       return { bg: 'bg-gray-100', text: 'text-gray-600' };
   }
@@ -67,7 +65,7 @@ export const Services: React.FC<ServicesProps> = ({ id }) => {
             return (
               <div
                 key={index}
-                className="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-shadow duration-300"
+                className="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-shadow duration-300 border border-gray-200"
               >
                 <div className={`inline-flex p-3 rounded-lg mb-4 ${colors.bg}`}>
                   <Icon className={`h-8 w-8 ${colors.text}`} />
@@ -80,17 +78,17 @@ export const Services: React.FC<ServicesProps> = ({ id }) => {
         </div>
 
         {/* Payment Options */}
-        <div className="bg-blue-50 rounded-2xl p-8 mb-12">
+        <div className="bg-gray-100 rounded-2xl p-8 mb-12 border border-gray-200">
           <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">Payment Options</h3>
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-white rounded-xl p-6 shadow-sm">
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
               <h4 className="text-lg font-semibold text-gray-900 mb-2">Attorney Lien / Letter of Protection</h4>
               <p className="text-gray-600">
                 If you have been injured due to someone else's negligence, we accept attorney liens.
                 This means you pay nothing upfront — your treatment is covered through your legal case settlement.
               </p>
             </div>
-            <div className="bg-white rounded-xl p-6 shadow-sm">
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
               <h4 className="text-lg font-semibold text-gray-900 mb-2">Private Pay</h4>
               <p className="text-gray-600">
                 We offer competitive self-pay rates with transparent pricing. No insurance headaches,
@@ -101,22 +99,22 @@ export const Services: React.FC<ServicesProps> = ({ id }) => {
         </div>
 
         {/* Call to Action */}
-        <div className="text-center bg-gray-900 rounded-2xl p-8">
+        <div className="text-center bg-[#BB0000] rounded-2xl p-8">
           <h3 className="text-2xl font-bold text-white mb-4">Ready to Start Your Recovery?</h3>
-          <p className="text-gray-300 mb-6 max-w-xl mx-auto">
+          <p className="text-gray-100 mb-6 max-w-xl mx-auto">
             Contact us today to schedule an appointment or learn more about how we can help with your rehabilitation needs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="tel:956-476-5310"
-              className="inline-flex items-center justify-center bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+              className="inline-flex items-center justify-center bg-white text-[#BB0000] px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
             >
               <Phone className="h-5 w-5 mr-2" />
               Call (956) 476-5310
             </a>
             <a
               href="mailto:buckeyephysicaltherapy@gmail.com"
-              className="inline-flex items-center justify-center bg-white text-gray-900 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              className="inline-flex items-center justify-center bg-gray-900 text-white px-8 py-4 rounded-lg font-semibold hover:bg-black transition-colors"
             >
               <Mail className="h-5 w-5 mr-2" />
               Email Us
