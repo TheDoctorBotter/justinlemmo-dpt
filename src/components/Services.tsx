@@ -1,5 +1,5 @@
 import React from 'react';
-import { Activity, Car, Briefcase, Heart, Phone, Mail } from 'lucide-react';
+import { Car, Briefcase, Activity, Heart, Phone, Mail } from 'lucide-react';
 
 interface ServicesProps {
   id?: string;
@@ -9,114 +9,89 @@ const services = [
   {
     icon: Car,
     title: 'Auto Accident Rehabilitation',
-    description: 'Comprehensive treatment for injuries sustained in motor vehicle accidents. We help you recover from whiplash, back injuries, and other trauma.',
-    color: 'scarlet',
+    description: 'Comprehensive treatment for motor vehicle injuries including whiplash, back pain, and soft tissue trauma.',
   },
   {
     icon: Briefcase,
     title: 'Work Injury Recovery',
-    description: 'Specialized care for workplace injuries. We work with you and your employer to get you back to work safely and efficiently.',
-    color: 'gray',
+    description: 'Specialized care to help you recover from workplace injuries and return to work safely.',
   },
   {
     icon: Activity,
     title: 'Orthopedic Rehabilitation',
-    description: 'Expert treatment for musculoskeletal conditions including back pain, neck pain, shoulder injuries, knee problems, and post-surgical recovery.',
-    color: 'black',
+    description: 'Expert treatment for musculoskeletal conditions including back, neck, shoulder, and knee problems.',
   },
   {
     icon: Heart,
     title: 'General Physical Therapy',
-    description: 'Personalized treatment plans for a wide range of conditions. Whether recovering from surgery or managing chronic pain, we are here to help.',
-    color: 'scarlet',
+    description: 'Personalized treatment plans for a wide range of conditions and post-surgical recovery.',
   },
 ];
 
-const getColorClasses = (color: string) => {
-  switch (color) {
-    case 'scarlet':
-      return { bg: 'bg-[#BB0000]', text: 'text-white' };
-    case 'gray':
-      return { bg: 'bg-gray-600', text: 'text-white' };
-    case 'black':
-      return { bg: 'bg-gray-900', text: 'text-white' };
-    default:
-      return { bg: 'bg-gray-100', text: 'text-gray-600' };
-  }
-};
-
 export const Services: React.FC<ServicesProps> = ({ id }) => {
   return (
-    <section id={id} className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Our Services
-          </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Comprehensive physical therapy services tailored to your specific needs and recovery goals.
+    <section id={id} className="section-padding bg-white">
+      <div className="container-main">
+        <div className="text-center mb-12">
+          <h2 className="section-title">Our Services</h2>
+          <p className="section-subtitle">
+            Comprehensive physical therapy services tailored to your specific needs.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
+        <div className="grid sm:grid-cols-2 gap-6 mb-12">
           {services.map((service, index) => {
-            const colors = getColorClasses(service.color);
             const Icon = service.icon;
             return (
-              <div
-                key={index}
-                className="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-shadow duration-300 border border-gray-200"
-              >
-                <div className={`inline-flex p-3 rounded-lg mb-4 ${colors.bg}`}>
-                  <Icon className={`h-8 w-8 ${colors.text}`} />
+              <div key={index} className="card p-6">
+                <div className="w-12 h-12 bg-scarlet/10 rounded-lg flex items-center justify-center mb-4">
+                  <Icon className="h-6 w-6 text-scarlet" aria-hidden="true" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{service.description}</p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">{service.title}</h3>
+                <p className="text-gray-600">{service.description}</p>
               </div>
             );
           })}
         </div>
 
         {/* Payment Options */}
-        <div className="bg-gray-100 rounded-2xl p-8 mb-12 border border-gray-200">
-          <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">Payment Options</h3>
+        <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200">
+          <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">Payment Options</h3>
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-              <h4 className="text-lg font-semibold text-gray-900 mb-2">Attorney Lien / Letter of Protection</h4>
-              <p className="text-gray-600">
-                If you have been injured due to someone else's negligence, we accept attorney liens.
-                This means you pay nothing upfront — your treatment is covered through your legal case settlement.
+            <div className="bg-white rounded-xl p-6 border border-gray-200">
+              <h4 className="font-semibold text-gray-900 mb-2">Attorney Lien / Letter of Protection</h4>
+              <p className="text-gray-600 text-sm">
+                Injured due to someone else's negligence? We accept attorney liens—pay nothing upfront.
               </p>
             </div>
-            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-              <h4 className="text-lg font-semibold text-gray-900 mb-2">Private Pay</h4>
-              <p className="text-gray-600">
-                We offer competitive self-pay rates with transparent pricing. No insurance headaches,
-                no surprise bills. Just quality care at fair prices.
+            <div className="bg-white rounded-xl p-6 border border-gray-200">
+              <h4 className="font-semibold text-gray-900 mb-2">Cash Pay</h4>
+              <p className="text-gray-600 text-sm">
+                Competitive self-pay rates with transparent pricing. No insurance hassles.
               </p>
             </div>
           </div>
         </div>
 
-        {/* Call to Action */}
-        <div className="text-center bg-[#BB0000] rounded-2xl p-8">
-          <h3 className="text-2xl font-bold text-white mb-4">Ready to Start Your Recovery?</h3>
-          <p className="text-gray-100 mb-6 max-w-xl mx-auto">
-            Contact us today to schedule an appointment or learn more about how we can help with your rehabilitation needs.
+        {/* CTA */}
+        <div className="text-center mt-12 bg-scarlet rounded-2xl p-8">
+          <h3 className="text-xl font-bold text-white mb-4">Ready to Start Your Recovery?</h3>
+          <p className="text-white/90 mb-6 max-w-xl mx-auto">
+            Contact us today to schedule an evaluation and take the first step toward recovery.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="tel:956-476-5310"
-              className="inline-flex items-center justify-center bg-white text-[#BB0000] px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              href="tel:9564765310"
+              className="inline-flex items-center justify-center bg-white text-scarlet px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
             >
-              <Phone className="h-5 w-5 mr-2" />
-              Call (956) 476-5310
+              <Phone className="h-5 w-5 mr-2" aria-hidden="true" />
+              (956) 476-5310
             </a>
             <a
               href="mailto:buckeyephysicaltherapy@gmail.com"
-              className="inline-flex items-center justify-center bg-gray-900 text-white px-8 py-4 rounded-lg font-semibold hover:bg-black transition-colors"
+              className="btn-dark px-8 py-4"
             >
-              <Mail className="h-5 w-5 mr-2" />
+              <Mail className="h-5 w-5 mr-2" aria-hidden="true" />
               Email Us
             </a>
           </div>
