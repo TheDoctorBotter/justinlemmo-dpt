@@ -1,27 +1,32 @@
 import React from 'react';
-import { Phone, Calendar, MapPin } from 'lucide-react';
+import { Phone, Calendar, Globe } from 'lucide-react';
 
 export const Hero = () => {
   return (
     <section className="bg-gradient-to-br from-gray-50 to-gray-100 section-padding">
       <div className="container-main">
         <div className="text-center max-w-3xl mx-auto">
-          {/* Location Badge */}
-          <div className="inline-flex items-center bg-scarlet/10 text-scarlet px-4 py-2 rounded-full mb-6">
-            <MapPin className="h-4 w-4 mr-2" aria-hidden="true" />
-            <span className="font-medium text-sm">Coming Soon to Edinburg, TX</span>
-          </div>
-
-          {/* H1 */}
-          <h1 className="text-gray-900 mb-6">
-            Physical Therapy in Edinburg, TX
-            <span className="block text-scarlet mt-2">Personal Injury & Cash Pay</span>
+          {/* Headline Stack */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-3">
+            Buckeye Physical Therapy
           </h1>
+          <p className="text-xl md:text-2xl text-gray-700 font-medium mb-2">
+            Justin Lemmo, PT, DPT
+          </p>
+          <p className="text-lg md:text-xl text-scarlet font-semibold mb-8">
+            1-on-1 Physical Therapy. Done Right.
+          </p>
 
-          {/* Subhead */}
-          <p className="text-lg md:text-xl text-gray-600 mb-8">
+          {/* Supporting Line */}
+          <p className="text-base md:text-lg text-gray-600 mb-4">
             1-on-1 visits&nbsp;&nbsp;•&nbsp;&nbsp;Fast scheduling&nbsp;&nbsp;•&nbsp;&nbsp;Evidence-based care
           </p>
+
+          {/* Bilingual Badge */}
+          <div className="inline-flex items-center bg-gray-200 text-gray-700 px-4 py-2 rounded-full mb-10">
+            <Globe className="h-4 w-4 mr-2" aria-hidden="true" />
+            <span className="font-medium text-sm">Bilingual: English &amp; Spanish</span>
+          </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
@@ -53,7 +58,7 @@ export const Hero = () => {
             </div>
             <div className="flex items-center">
               <span className="w-2 h-2 bg-green-500 rounded-full mr-2" aria-hidden="true"></span>
-              Attorney Liens Accepted
+              Edinburg, TX
             </div>
           </div>
         </div>
