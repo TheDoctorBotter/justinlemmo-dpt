@@ -9,9 +9,9 @@ import { Testimonials } from './components/Testimonials';
 import { Disclaimers } from './components/Disclaimers';
 import { Footer } from './components/Footer';
 import { MobileCTABar } from './components/MobileCTABar';
-import { PrivacyPolicy, TermsOfUse, Disclaimer, Accessibility } from './components/pages';
+import { PrivacyPolicy, TermsOfUse, Disclaimer, Accessibility, MeetTheTherapist } from './components/pages';
 
-type Page = 'home' | 'privacy' | 'terms' | 'disclaimer' | 'accessibility';
+type Page = 'home' | 'privacy' | 'terms' | 'disclaimer' | 'accessibility' | 'meet-therapist';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>('home');
@@ -28,7 +28,7 @@ function App() {
   if (currentPage === 'privacy') {
     return (
       <div className="min-h-screen bg-white">
-        <Header />
+        <Header onNavigate={handleNavigate} />
         <main>
           <PrivacyPolicy onBack={handleBackToHome} />
         </main>
@@ -40,7 +40,7 @@ function App() {
   if (currentPage === 'terms') {
     return (
       <div className="min-h-screen bg-white">
-        <Header />
+        <Header onNavigate={handleNavigate} />
         <main>
           <TermsOfUse onBack={handleBackToHome} />
         </main>
@@ -52,7 +52,7 @@ function App() {
   if (currentPage === 'disclaimer') {
     return (
       <div className="min-h-screen bg-white">
-        <Header />
+        <Header onNavigate={handleNavigate} />
         <main>
           <Disclaimer onBack={handleBackToHome} />
         </main>
@@ -64,9 +64,21 @@ function App() {
   if (currentPage === 'accessibility') {
     return (
       <div className="min-h-screen bg-white">
-        <Header />
+        <Header onNavigate={handleNavigate} />
         <main>
           <Accessibility onBack={handleBackToHome} />
+        </main>
+        <Footer onNavigate={handleNavigate} />
+      </div>
+    );
+  }
+
+  if (currentPage === 'meet-therapist') {
+    return (
+      <div className="min-h-screen bg-white">
+        <Header onNavigate={handleNavigate} />
+        <main>
+          <MeetTheTherapist onBack={handleBackToHome} />
         </main>
         <Footer onNavigate={handleNavigate} />
       </div>
@@ -76,7 +88,7 @@ function App() {
   // Home page
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      <Header onNavigate={handleNavigate} />
       <main>
         <Hero />
         <HowItWorks />

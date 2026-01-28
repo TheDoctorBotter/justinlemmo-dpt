@@ -1,7 +1,11 @@
 import React from 'react';
 import { Stethoscope, Menu, X, Phone } from 'lucide-react';
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  onNavigate?: (page: string) => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
 
   const scrollToSection = (sectionId: string) => {
@@ -13,7 +17,17 @@ export const Header: React.FC = () => {
   };
 
   const handleLogoClick = () => {
+    if (onNavigate) {
+      onNavigate('home');
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    setShowMobileMenu(false);
+  };
+
+  const handleMeetTherapist = () => {
+    if (onNavigate) {
+      onNavigate('meet-therapist');
+    }
     setShowMobileMenu(false);
   };
 
@@ -41,6 +55,12 @@ export const Header: React.FC = () => {
               className="text-gray-700 hover:text-scarlet transition-colors font-medium"
             >
               Services
+            </button>
+            <button
+              onClick={handleMeetTherapist}
+              className="text-gray-700 hover:text-scarlet transition-colors font-medium"
+            >
+              Meet the Therapist
             </button>
             <button
               onClick={() => scrollToSection('about')}
@@ -99,6 +119,12 @@ export const Header: React.FC = () => {
                 className="text-left text-gray-700 hover:text-scarlet transition-colors py-2 font-medium"
               >
                 Services
+              </button>
+              <button
+                onClick={handleMeetTherapist}
+                className="text-left text-gray-700 hover:text-scarlet transition-colors py-2 font-medium"
+              >
+                Meet the Therapist
               </button>
               <button
                 onClick={() => scrollToSection('about')}
