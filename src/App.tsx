@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { HowItWorks } from './components/HowItWorks';
@@ -13,15 +13,51 @@ import { PrivacyPolicy, TermsOfUse, Disclaimer, Accessibility, MeetTheTherapist 
 
 type Page = 'home' | 'privacy' | 'terms' | 'disclaimer' | 'accessibility' | 'meet-therapist';
 
+const pathToPage: Record<string, Page> = {
+  '/': 'home',
+  '/privacy': 'privacy',
+  '/terms': 'terms',
+  '/disclaimer': 'disclaimer',
+  '/accessibility': 'accessibility',
+  '/meet-therapist': 'meet-therapist',
+};
+
+const pageToPath: Record<Page, string> = {
+  'home': '/',
+  'privacy': '/privacy',
+  'terms': '/terms',
+  'disclaimer': '/disclaimer',
+  'accessibility': '/accessibility',
+  'meet-therapist': '/meet-therapist',
+};
+
+function getPageFromPath(): Page {
+  const path = window.location.pathname;
+  return pathToPage[path] || 'home';
+}
+
 function App() {
-  const [currentPage, setCurrentPage] = useState<Page>('home');
+  const [currentPage, setCurrentPage] = useState<Page>(getPageFromPath);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPage(getPageFromPath());
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   const handleNavigate = (page: string) => {
-    setCurrentPage(page as Page);
+    const newPage = page as Page;
+    setCurrentPage(newPage);
+    window.history.pushState({}, '', pageToPath[newPage]);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleBackToHome = () => {
     setCurrentPage('home');
+    window.history.pushState({}, '', '/');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   // Render policy pages
