@@ -31,8 +31,16 @@ const pageToPath: Record<Page, string> = {
   'meet-therapist': '/meet-therapist',
 };
 
+const normalizePath = (path: string) => {
+  const trimmedPath = path.trim().toLowerCase();
+  if (trimmedPath.length > 1 && trimmedPath.endsWith('/')) {
+    return trimmedPath.slice(0, -1);
+  }
+  return trimmedPath;
+};
+
 function getPageFromPath(): Page {
-  const path = window.location.pathname;
+  const path = normalizePath(window.location.pathname);
   return pathToPage[path] || 'home';
 }
 
