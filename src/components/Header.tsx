@@ -69,12 +69,6 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
               About
             </button>
             <button
-              onClick={() => scrollToSection('testimonials')}
-              className="text-gray-700 hover:text-scarlet transition-colors font-medium"
-            >
-              Reviews
-            </button>
-            <button
               onClick={() => scrollToSection('contact')}
               className="text-gray-700 hover:text-scarlet transition-colors font-medium"
             >
@@ -131,12 +125,6 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
                 className="text-left text-gray-700 hover:text-scarlet transition-colors py-2 font-medium"
               >
                 About
-              </button>
-              <button
-                onClick={() => scrollToSection('testimonials')}
-                className="text-left text-gray-700 hover:text-scarlet transition-colors py-2 font-medium"
-              >
-                Reviews
               </button>
               <button
                 onClick={() => scrollToSection('contact')}

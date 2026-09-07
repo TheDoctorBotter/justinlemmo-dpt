@@ -64,9 +64,9 @@ export const Services: React.FC<ServicesProps> = ({ id }) => {
           <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">Payment Options</h3>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-white rounded-xl p-6 border border-gray-200">
-              <h4 className="font-semibold text-gray-900 mb-2">Attorney Lien / Letter of Protection</h4>
+<h4 className="font-semibold text-gray-900 mb-2">ECI &amp; Early Intervention</h4>
               <p className="text-gray-600 text-sm">
-                Injured due to someone else's negligence? We accept attorney liens—pay nothing upfront.
+                Early Childhood Intervention services are arranged through your ECI program at no cost to most families.
               </p>
             </div>
             <div className="bg-white rounded-xl p-6 border border-gray-200">

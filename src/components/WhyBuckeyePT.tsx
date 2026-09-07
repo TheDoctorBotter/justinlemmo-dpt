@@ -20,7 +20,7 @@ const benefits = [
   {
     icon: Shield,
     title: 'Flexible Payment',
-    description: 'Cash pay and attorney liens accepted. No insurance hassles.',
+    description: 'ECI-covered services and competitive cash-pay rates. No insurance hassles.',
   },
 ];
 

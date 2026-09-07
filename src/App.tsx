@@ -5,7 +5,6 @@ import { HowItWorks } from './components/HowItWorks';
 import { WhoWeHelp } from './components/WhoWeHelp';
 import { Services } from './components/Services';
 import { WhyBuckeyePT } from './components/WhyBuckeyePT';
-import { Testimonials } from './components/Testimonials';
 import { Disclaimers } from './components/Disclaimers';
 import { Footer } from './components/Footer';
 import { MobileCTABar } from './components/MobileCTABar';
@@ -153,7 +152,6 @@ function App() {
         <WhoWeHelp />
         <Services id="services" />
         <WhyBuckeyePT id="about" />
-        <Testimonials id="testimonials" />
         <Disclaimers id="disclaimers" />
       </main>
       <Footer onNavigate={handleNavigate} />

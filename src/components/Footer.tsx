@@ -92,11 +92,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 </a>
               </li>
               <li>
-                <a href="#testimonials" className="text-gray-400 hover:text-white transition-colors">
-                  Reviews
-                </a>
-              </li>
-              <li>
                 <a href="#contact" className="text-gray-400 hover:text-white transition-colors">
                   Contact
                 </a>
