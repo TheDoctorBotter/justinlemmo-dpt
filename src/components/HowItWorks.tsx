@@ -6,7 +6,7 @@ const steps = [
     icon: Calendar,
     step: '1',
     title: 'Book',
-    description: 'Call or text to schedule an evaluation. Same-week appointments often available. ECI referrals welcome.',
+    description: 'Call or text to schedule an evaluation. Same-week appointments often available.',
   },
   {
     icon: ClipboardList,

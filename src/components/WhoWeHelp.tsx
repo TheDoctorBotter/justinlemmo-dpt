@@ -4,8 +4,8 @@ import { Baby, Blocks, Footprints, Briefcase, Activity, Dumbbell, Stethoscope, U
 const conditions = [
   {
     icon: Baby,
-    title: 'Early Intervention (Birth\u20133)',
-    description: 'In-home therapy for infants and toddlers with developmental delays, through ECI.',
+    title: 'Early Intervention (Birth–3)',
+    description: 'In-home therapy for infants and toddlers with developmental delays, birth through 3 years.',
   },
   {
     icon: Blocks,

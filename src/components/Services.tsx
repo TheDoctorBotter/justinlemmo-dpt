@@ -8,8 +8,8 @@ interface ServicesProps {
 const services = [
   {
     icon: Baby,
-    title: 'Early Childhood Intervention (ECI)',
-    description: 'In-home physical therapy for infants and toddlers from birth to age three, coordinated with your ECI service plan and family routines.',
+    title: 'Early Intervention (Birth–3)',
+    description: 'In-home physical therapy for infants and toddlers from birth through three years of age, built around your family’s daily routines.',
   },
   {
     icon: Blocks,
@@ -62,13 +62,7 @@ export const Services: React.FC<ServicesProps> = ({ id }) => {
         {/* Payment Options */}
         <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200">
           <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">Payment Options</h3>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-white rounded-xl p-6 border border-gray-200">
-<h4 className="font-semibold text-gray-900 mb-2">ECI &amp; Early Intervention</h4>
-              <p className="text-gray-600 text-sm">
-                Early Childhood Intervention services are arranged through your ECI program at no cost to most families.
-              </p>
-            </div>
+          <div className="max-w-md mx-auto">
             <div className="bg-white rounded-xl p-6 border border-gray-200">
               <h4 className="font-semibold text-gray-900 mb-2">Cash Pay</h4>
               <p className="text-gray-600 text-sm">

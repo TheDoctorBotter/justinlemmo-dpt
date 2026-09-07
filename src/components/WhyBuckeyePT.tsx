@@ -20,7 +20,7 @@ const benefits = [
   {
     icon: Shield,
     title: 'Flexible Payment',
-    description: 'ECI-covered services and competitive cash-pay rates. No insurance hassles.',
+    description: 'Competitive cash-pay rates with transparent pricing. No insurance hassles.',
   },
 ];
 

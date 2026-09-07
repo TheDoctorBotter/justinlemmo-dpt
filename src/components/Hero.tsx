@@ -19,7 +19,7 @@ export const Hero = () => {
 
           {/* Supporting Line */}
           <p className="text-base md:text-lg text-gray-600 mb-4">
-            In-home &amp; 1-on-1 visits&nbsp;&nbsp;•&nbsp;&nbsp;Birth to 3 through ECI&nbsp;&nbsp;•&nbsp;&nbsp;Evidence-based care
+            In-home &amp; 1-on-1 visits&nbsp;&nbsp;•&nbsp;&nbsp;Birth through 3 years&nbsp;&nbsp;•&nbsp;&nbsp;Evidence-based care
           </p>
 
           {/* Bilingual Badge */}
