@@ -1,36 +1,46 @@
 import React from 'react';
-import { Car, Briefcase, Activity, Dumbbell, Stethoscope, Users } from 'lucide-react';
+import { Baby, Blocks, Footprints, Briefcase, Activity, Dumbbell, Stethoscope, Users } from 'lucide-react';
 
 const conditions = [
   {
-    icon: Car,
-    title: 'Auto Accidents',
-    description: 'Whiplash, back injuries, and trauma from motor vehicle accidents.',
+    icon: Baby,
+    title: 'Early Intervention (Birth\u20133)',
+    description: 'In-home therapy for infants and toddlers with developmental delays, through ECI.',
+  },
+  {
+    icon: Blocks,
+    title: 'Developmental Delays',
+    description: 'Delayed rolling, sitting, crawling, or walking, and low muscle tone.',
+  },
+  {
+    icon: Footprints,
+    title: 'Walking & Gait Concerns',
+    description: 'Toe walking, in-toeing, frequent falls, and coordination difficulties.',
+  },
+  {
+    icon: Activity,
+    title: 'Torticollis & Plagiocephaly',
+    description: 'Head tilt, neck tightness, and flat-head positioning in infants.',
+  },
+  {
+    icon: Stethoscope,
+    title: 'Pediatric Post-Surgery',
+    description: 'Rehabilitation and return to play after orthopedic surgery.',
+  },
+  {
+    icon: Dumbbell,
+    title: 'Youth Sports Injuries',
+    description: 'Sprains, strains, tendinitis, and safe return-to-sport rehab.',
+  },
+  {
+    icon: Users,
+    title: 'Orthopedic & Back Pain',
+    description: 'Shoulder, knee, hip, neck, and back conditions in older children and adults.',
   },
   {
     icon: Briefcase,
     title: 'Work Injuries',
     description: 'Repetitive strain, lifting injuries, and workplace accidents.',
-  },
-  {
-    icon: Activity,
-    title: 'Back & Neck Pain',
-    description: 'Herniated discs, sciatica, chronic pain, and spinal conditions.',
-  },
-  {
-    icon: Dumbbell,
-    title: 'Sports Injuries',
-    description: 'Sprains, strains, tendinitis, and return-to-sport rehab.',
-  },
-  {
-    icon: Stethoscope,
-    title: 'Post-Surgery',
-    description: 'Joint replacements, rotator cuff repairs, ACL reconstruction.',
-  },
-  {
-    icon: Users,
-    title: 'General Orthopedic',
-    description: 'Shoulder, knee, hip pain, and musculoskeletal conditions.',
   },
 ];
 
@@ -41,7 +51,7 @@ export const WhoWeHelp: React.FC = () => {
         <div className="text-center mb-12">
           <h2 className="section-title">Who We Help</h2>
           <p className="section-subtitle">
-            We treat a wide range of conditions with personalized, evidence-based care.
+            Pediatric physical therapy is our focus\u2014with orthopedic care available for the whole family.
           </p>
         </div>
 

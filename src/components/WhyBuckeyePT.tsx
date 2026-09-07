@@ -10,7 +10,7 @@ const benefits = [
   {
     icon: Award,
     title: '15+ Years Experience',
-    description: 'Doctorate in Physical Therapy with extensive orthopedic expertise.',
+    description: 'Doctorate in Physical Therapy with extensive pediatric and orthopedic expertise.',
   },
   {
     icon: Target,
@@ -33,8 +33,9 @@ export const WhyBuckeyePT: React.FC<{ id?: string }> = ({ id }) => {
           <div>
             <h2 className="section-title">Why Buckeye Physical Therapy?</h2>
             <p className="text-gray-600 mb-8">
-              At Buckeye Physical Therapy, you're not just another patient number. Dr. Justin Lemmo, PT, DPT
-              provides personalized, hands-on care focused on getting you back to your life—faster and stronger.
+              At Buckeye Physical Therapy, your child is never just another patient number. Dr. Justin Lemmo,
+              PT, DPT provides personalized, play-based care that meets each child where they are—at home, in
+              the clinic, and alongside the family.
             </p>
 
             <div className="space-y-6">

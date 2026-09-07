@@ -1,5 +1,5 @@
 import React from 'react';
-import { Car, Briefcase, Activity, Heart, Phone, Mail } from 'lucide-react';
+import { Baby, Blocks, Briefcase, Activity, Heart, Phone, Mail } from 'lucide-react';
 
 interface ServicesProps {
   id?: string;
@@ -7,19 +7,24 @@ interface ServicesProps {
 
 const services = [
   {
-    icon: Car,
-    title: 'Auto Accident Rehabilitation',
-    description: 'Comprehensive treatment for motor vehicle injuries including whiplash, back pain, and soft tissue trauma.',
+    icon: Baby,
+    title: 'Early Childhood Intervention (ECI)',
+    description: 'In-home physical therapy for infants and toddlers from birth to age three, coordinated with your ECI service plan and family routines.',
   },
   {
-    icon: Briefcase,
-    title: 'Work Injury Recovery',
-    description: 'Specialized care to help you recover from workplace injuries and return to work safely.',
+    icon: Blocks,
+    title: 'Pediatric Physical Therapy',
+    description: 'Play-based treatment for developmental delays, gross motor skills, gait and balance, torticollis, and low muscle tone.',
   },
   {
     icon: Activity,
     title: 'Orthopedic Rehabilitation',
     description: 'Expert treatment for musculoskeletal conditions including back, neck, shoulder, and knee problems.',
+  },
+  {
+    icon: Briefcase,
+    title: 'Work Injury Recovery',
+    description: 'Specialized care to help you recover from workplace injuries and return to work safely.',
   },
   {
     icon: Heart,
@@ -35,7 +40,7 @@ export const Services: React.FC<ServicesProps> = ({ id }) => {
         <div className="text-center mb-12">
           <h2 className="section-title">Our Services</h2>
           <p className="section-subtitle">
-            Comprehensive physical therapy services tailored to your specific needs.
+            Pediatric and early intervention therapy, plus orthopedic care for older children and adults.
           </p>
         </div>
 

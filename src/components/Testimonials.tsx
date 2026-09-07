@@ -14,12 +14,6 @@ interface TestimonialsProps {
 
 const testimonials: Testimonial[] = [
   {
-    name: "Sarah M.",
-    condition: "Auto Accident Recovery",
-    rating: 5,
-    text: "After my car accident, I was in constant pain. Dr. Lemmo created a personalized treatment plan that got me back to normal. His expertise and dedication made all the difference.",
-  },
-  {
     name: "Michael R.",
     condition: "Work Injury",
     rating: 5,
@@ -36,12 +30,6 @@ const testimonials: Testimonial[] = [
     condition: "Knee Rehabilitation",
     rating: 5,
     text: "Post-surgery rehabilitation with Dr. Lemmo was excellent. He took the time to explain every exercise and adjusted my program as I progressed.",
-  },
-  {
-    name: "Lisa T.",
-    condition: "Personal Injury Case",
-    rating: 5,
-    text: "My attorney recommended Buckeye Physical Therapy. Dr. Lemmo provided excellent care and thorough documentation for my case.",
   },
   {
     name: "Mark S.",

@@ -6,19 +6,19 @@ const steps = [
     icon: Calendar,
     step: '1',
     title: 'Book',
-    description: 'Call or text to schedule your initial evaluation. Same-week appointments often available.',
+    description: 'Call or text to schedule an evaluation. Same-week appointments often available. ECI referrals welcome.',
   },
   {
     icon: ClipboardList,
     step: '2',
     title: 'Evaluate',
-    description: 'Comprehensive 1-on-1 assessment to identify the root cause of your pain or limitation.',
+    description: 'A comprehensive 1-on-1 assessment of your child’s movement, strength, and development.',
   },
   {
     icon: TrendingUp,
     step: '3',
     title: 'Recover',
-    description: 'Follow your personalized treatment plan with hands-on care and evidence-based exercises.',
+    description: 'Follow a personalized plan built around your family’s routines, with hands-on care and home strategies.',
   },
 ];
 
@@ -29,7 +29,7 @@ export const HowItWorks: React.FC = () => {
         <div className="text-center mb-12">
           <h2 className="section-title">How It Works</h2>
           <p className="section-subtitle">
-            Getting started is simple. We make physical therapy accessible and straightforward.
+            Getting started is simple. We make therapy accessible and straightforward for families.
           </p>
         </div>
 

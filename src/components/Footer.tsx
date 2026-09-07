@@ -29,8 +29,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </div>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Quality physical therapy services specializing in personal injury,
-              attorney lien cases, and cash pay patients in the Rio Grande Valley.
+              Pediatric and early intervention physical therapy in the Rio Grande Valley,
+              plus orthopedic care for older children and adults.
             </p>
           </div>
 

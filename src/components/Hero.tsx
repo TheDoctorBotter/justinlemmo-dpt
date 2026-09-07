@@ -14,12 +14,12 @@ export const Hero = () => {
             Justin Lemmo, PT, DPT
           </p>
           <p className="text-lg md:text-xl text-scarlet font-semibold mb-8">
-            1-on-1 Physical Therapy. Done Right.
+            Pediatric &amp; Early Intervention Physical Therapy
           </p>
 
           {/* Supporting Line */}
           <p className="text-base md:text-lg text-gray-600 mb-4">
-            1-on-1 visits&nbsp;&nbsp;•&nbsp;&nbsp;Fast scheduling&nbsp;&nbsp;•&nbsp;&nbsp;Evidence-based care
+            In-home &amp; 1-on-1 visits&nbsp;&nbsp;•&nbsp;&nbsp;Birth to 3 through ECI&nbsp;&nbsp;•&nbsp;&nbsp;Evidence-based care
           </p>
 
           {/* Bilingual Badge */}
